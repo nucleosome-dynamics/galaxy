@@ -1,0 +1,17 @@
+<tool id="NFR_stats" name="NFR Statistics" version="0.1">
+  <requirements>
+    <container type="docker">mmbirb/nucldyn</container>
+  </requirements>
+  <description>Gather gene and genome-wide statistics on NFR</description>
+  <command>
+    docker run -v /gpfs/database/files:/data_dir -v /gpfs/database/files:/public_dir -u 1000  mmbirb/nucldyn galaxy NFR_stats --input $gff_file --out_gw $output_gw_csv_file --genome $ref_genome_gff_file > $log_file 
+  </command>
+  <inputs>
+    <param name="gff_file" type="data" format="gff" label="Input Nucleosome Calls"/>
+    <param name="ref_genome_gff_file" type="data" format="gff" label="Reference genes (GFF)"/>
+</inputs>
+  <outputs>
+    <data format="csv" name="output_gw_csv_file" label="${gff_file.name}.NFR_stats.gw.csv"/>
+    <data format="txt" name="log_file" label="${gff_file.name}.NFS_stats.log"/>
+  </outputs>
+</tool>

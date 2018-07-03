@@ -1,0 +1,18 @@
+<tool id="NFR" name="NFR" version="0.1">
+  <requirements>
+    <container type="docker">mmbirb/nucldyn</container>
+  </requirements>
+  <description>Determine Nucleosome Free Regions from nucleR nucleosome calls</description>
+  <command>
+    docker run -v /gpfs/database/files:/data_dir -u 1000  mmbirb/nucldyn galaxy NFR --input $gff_file --output $output_gff_file --minwidth $minwidth --threshold $threshold > $log_file 
+  </command>
+  <inputs>
+    <param name="gff_file" type="data" format="gff" label="Nucleosome Calls"/>
+    <param name="minwidth" size="4" type="integer" value="110" label="Min Region Width" />  
+    <param name="threshold" size="4" type="integer" value="400" label="Max Region Width" />  
+</inputs>
+  <outputs>
+    <data format="gff" name="output_gff_file" label="${gff_file.name}.NFR.gff"/>
+    <data format="txt" name="log_file" label="${gff_file.name}.NFR.log"/>
+  </outputs>
+</tool>

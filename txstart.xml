@@ -1,0 +1,19 @@
+<tool id="txstart" name="txstart" version="0.1">
+  <requirements>
+    <container type="docker">mmbirb/nucldyn</container>
+  </requirements>
+  <description>Classify nucleosomes at TSS</description>
+  <command>
+    docker run -v /gpfs/database/files:/data_dir -u 1000  mmbirb/nucldyn galaxy txstart --calls $gff_file --genome $ref_genome_gff_file  --output $output_gff_file --window $window --open_thres $open_thres > $log_file 2> /dev/null
+  </command>
+  <inputs>
+    <param name="gff_file" type="data" format="gff" label="Nucleosome calls"/>
+    <param name="ref_genome_gff_file" type="data" format="gff" label="Reference genes (GFF)"/>
+    <param name="window" size="4" type="integer" value="300" label="Window size" />  
+    <param name="open_thres" size="4" type="integer" value="215" label="Opening threshold" />  
+</inputs>
+  <outputs>
+    <data format="gff" name="output_gff_file" label="${gff_file.name}.TSS.gff"/>
+    <data format="txt" name="log_file" label="${gff_file.name}.TSS.log"/>
+  </outputs>
+</tool>

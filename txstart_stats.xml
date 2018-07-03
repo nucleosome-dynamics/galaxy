@@ -1,0 +1,19 @@
+<tool id="txstart_stats" name="txstart Statistics" version="0.1">
+  <requirements>
+    <container type="docker">mmbirb/nucldyn</container>
+  </requirements>
+  <description>Gather gene and genome-wide statistics on nucleosomes at TSS</description>
+  <command>
+    docker run -v /gpfs/database/files:/data_dir -u 1000  mmbirb/nucldyn galaxy txstart_stats --input $gff_file --out_genes $output_genes_csv_file --out_gw $output_gw_png_file --genome $ref_genome_gff_file --out_gw2 $output_gw2_png_file > $log_file 
+  </command>
+  <inputs>
+    <param name="gff_file" type="data" format="gff" label="Input Nucleosome Calls"/>
+    <param name="ref_genome_gff_file" type="data" format="gff" label="Reference genes (GFF)"/>
+</inputs>
+  <outputs>
+    <data format="csv" name="output_genes_csv_file" label="${gff_file.name}.TSS_stats.genes.csv"/>
+    <data format="png" name="output_gw_png_file" label="${gff_file.name}.TSS_stats.gw.png"/>
+    <data format="png" name="output_gw2_png_file" label="${gff_file.name}.TSS_stats.gw2.png"/>
+    <data format="txt" name="log_file" label="${gff_file.name}.TSS_stats.log"/>
+  </outputs>
+</tool>

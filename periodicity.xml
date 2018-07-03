@@ -1,0 +1,25 @@
+<tool id="periodicity" name="Periodicity" version="0.1">
+  <requirements>
+    <container type="docker">mmbirb/nucldyn</container>
+  </requirements>
+  <description>Analyze periodicity of nucleosome positions within genes</description>
+  <command>
+    docker run -v /gpfs/database/files:/data_dir -u 1000  mmbirb/nucldyn galaxy periodicity --calls $gff_file --reads $rdata_file --gffOutput $output_gff_file --type $seq_type --bwOutput $bwOutput_file --genes $ref_genes_gff_file --chrom_sizes $ref_chrom_sizes --periodicity $periodicity > $log_file
+  </command>
+  <inputs>
+    <param name="gff_file" type="data" format="gff" label="Nucleosome Calls"/>
+    <param name="rdata_file" type="data" format="rdata" label="Input RData"/>
+    <param name="seq_type" type="select" label="Type of sequence reads">
+      <option value="single">Single</option>
+      <option value="paired">Paired</option>
+    </param>
+    <param name="ref_genes_gff_file" type="data" format="gff" label="Reference genes (GFF)"/>
+    <param name="ref_chrom_sizes" type="data" format="gg" label="Reference chromosome sizes"/>
+    <param name="periodicity" size="4" type="integer" value="165" label="Periodicity (bp)" />  
+</inputs>
+  <outputs>
+    <data format="gff" name="output_gff_file" label="${gff_file.name}.P.gff"/>
+    <data format="bigwig" name="bwOutput_file" label="${gff_file.name}.P.bigwig"/>
+    <data format="txt" name="log_file" label="${gff_file.name}.P.log"/>
+  </outputs>
+</tool>

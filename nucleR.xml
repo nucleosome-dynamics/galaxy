@@ -1,0 +1,35 @@
+<tool id="nucleR" name="nucleR" version="0.1">
+  <requirements>
+    <container type="docker">mmbirb/nucldyn</container>
+  </requirements>
+  <description>Analyze aligned BAM files from MNAse (in RData format)</description>
+  <command>
+    docker run -v /gpfs/database/files:/data_dir -u 1000  mmbirb/nucldyn galaxy nucleR --input $rdata_file --output $output_gff_file --type $seq_type --width $width --minoverlap $minoverlap --dyad_length $dyad_length --thresholdPercentage $thresholdPercentage --hthresh $hthres --wthresh $wthres --pcKeepComp $pcKeepComp --fdrOverAmp $fdrOverAmp --components 1  --trim $trim --threshold $threshold --thresholdValue $thresholdValue --fragmentLen $fragmentLen > $log_file 2> /dev/null
+  </command>
+  <inputs>
+    <param name="rdata_file" type="data" format="rdata" label="Input RData"/>
+    <param name="seq_type" type="select" label="Type of sequence reads">
+      <option value="single">Single</option>
+      <option value="paired">Paired</option>
+    </param>
+    <param name="width" size="4" type="integer" value="" label="Width" />  
+    <param name="minoverlap"   type="integer" value="" label="Min. Overlap (bp)"/>
+    <param name="dyad_length"  type="integer" value="" label="Dyad. length (bp)"/>
+    <param name="fragmentLen"  type="integer" value="170" label="Fragment Length (bp)"/>
+    <param name="chr"          type="text"    value="" label="Chromosome" size="10" optional="true"/>
+    <param name="start"        type="integer" value="" label="Start" optional="true"/>
+    <param name="end"          type="integer" value="" label="End" optional="true"/>
+    <param name="threshold"    type="boolean" checked="true" label="Use Threshold"/>
+    <param name="thresholdValue" type="integer" value="10" label="Threshold Value"/>
+    <param name="thresholdPercentage" type="float" value="35" label="Threshold Percentage (%)"/>
+    <param name="hthres"       type="float"   value="0.4" label="Peak height Threshold"/>
+    <param name="wthres"       type="float"   value="0.6" label="Peak width Threshold"/>
+    <param name="fdrOverAmp"   type="float"   value="0.05" label="fdrOverAmp"/>
+    <param name="pcKeepComp"   type="float"   value="0.02" label="pcKeepComp"/>
+    <param name="trim"         type="integer" value="50" label="Trim"/>
+</inputs>
+  <outputs>
+    <data format="gff" name="output_gff_file" label="${rdata_file.name}.gff"/>
+    <data format="txt" name="log_file" label="${rdata_file.name}.nucleR.log"/>
+  </outputs>
+</tool>
