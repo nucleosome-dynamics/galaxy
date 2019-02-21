@@ -1,10 +1,10 @@
 <tool id="nucleR_stats" name="nucleR Statistics" version="0.1">
   <requirements>
-    <container type="docker">mmbirb/nucldyn</container>
+    <container type="docker">mmbirb/nucldyn:0.3</container>
   </requirements>
-  <description>Gather gene and genome-wide statistics on NucleR results)</description>
+  <description>Gather gene and genome-wide statistics on NucleR results</description>
   <command>
-    docker run -v /gpfs/database/files:/data_dir -v /gpfs/database/files:/public_dir -u 1000  mmbirb/nucldyn galaxy nucleR_stats --input $gff_file --out_genes $output_genes_csv_file --out_gw $output_gw_csv_file --genome $ref_genome_gff_file > $log_file 
+    docker run -v /galaxy-central/database/files:/data_dir -v /galaxy-central/database/files:/public_dir -u `id -u`:`id -g`  mmbirb/nucldyn:0.3 galaxy nucleR_stats --input $gff_file --out_genes $output_genes_csv_file --out_gw $output_gw_csv_file --genome $ref_genome_gff_file > $log_file 
   </command>
   <inputs>
     <param name="gff_file" type="data" format="gff" label="Input Nucleosome Calls"/>

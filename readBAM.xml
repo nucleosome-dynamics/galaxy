@@ -1,10 +1,10 @@
-<tool id="readBAM" name="BAM-to-RData" version="0.1">
+<tool id="readBAM" name="readBAM" version="0.1">
   <requirements>
-    <container type="docker">mmbirb/nucldyn</container>
+    <container type="docker">mmbirb/nucldyn:v0.3</container>
   </requirements>
   <description>Convert aligned BAM files to RData format for NucleosomeDynamics</description>
   <command>
-    docker run -v /gpfs/database/files:/data_dir -u 1000  mmbirb/nucldyn galaxy readBAM --input $bam_file --output $rdata_file --type $seq_type
+    docker run -v /galaxy-central/database/files:/data_dir -u `id -u`:`id -g`  mmbirb/nucldyn:v0.3.1 galaxy readBAM --input $bam_file --output $rdata_file --type $seq_type
   </command>
   <inputs>
     <param name="bam_file" type="data" format="bam" label="BAM File to convert"/>
@@ -17,4 +17,3 @@
     <data format="rdata" name="rdata_file" label="${bam_file.name}.rdata"/>
   </outputs>
 </tool>
-      

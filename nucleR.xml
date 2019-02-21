@@ -1,10 +1,10 @@
 <tool id="nucleR" name="nucleR" version="0.1">
   <requirements>
-    <container type="docker">mmbirb/nucldyn</container>
+    <container type="docker">mmbirb/nucldyn:0.3</container>
   </requirements>
   <description>Analyze aligned BAM files from MNAse (in RData format)</description>
   <command>
-    docker run -v /gpfs/database/files:/data_dir -u 1000  mmbirb/nucldyn galaxy nucleR --input $rdata_file --output $output_gff_file --type $seq_type --width $width --minoverlap $minoverlap --dyad_length $dyad_length --thresholdPercentage $thresholdPercentage --hthresh $hthres --wthresh $wthres --pcKeepComp $pcKeepComp --fdrOverAmp $fdrOverAmp --components 1  --trim $trim --threshold $threshold --thresholdValue $thresholdValue --fragmentLen $fragmentLen > $log_file 2> /dev/null
+    docker run -v /galaxy-central/database/files:/data_dir -u `id -u`:`id -g` mmbirb/nucldyn:0.3 galaxy nucleR --input $rdata_file --output $output_gff_file --type $seq_type --width $width --minoverlap $minoverlap --dyad_length $dyad_length --thresholdPercentage $thresholdPercentage --hthresh $hthres --wthresh $wthres --pcKeepComp $pcKeepComp --fdrOverAmp $fdrOverAmp --components 1  --trim $trim --threshold $threshold --thresholdValue $thresholdValue --fragmentLen $fragmentLen > $log_file 2> /dev/null
   </command>
   <inputs>
     <param name="rdata_file" type="data" format="rdata" label="Input RData"/>
@@ -12,21 +12,21 @@
       <option value="single">Single</option>
       <option value="paired">Paired</option>
     </param>
-    <param name="width" size="4" type="integer" value="" label="Width" />  
-    <param name="minoverlap"   type="integer" value="" label="Min. Overlap (bp)"/>
-    <param name="dyad_length"  type="integer" value="" label="Dyad. length (bp)"/>
+    <param name="width" size="4" type="integer" value="147" label="Width" help="Size of each nucleosome, in bp."/>  
+    <param name="minoverlap"   type="integer" value="80" label="Minimum Overlap (bp)" help="Minimum overlap between two nucleosomes for merging them."/>
+    <param name="dyad_length"  type="integer" value="50" label="Dyad length (bp)" help="Lenght of the reads that should be used for nucleosome calling to define the dyad of the nuclesomes keeping the number of bases around the center of the read."/>
     <param name="fragmentLen"  type="integer" value="170" label="Fragment Length (bp)"/>
     <param name="chr"          type="text"    value="" label="Chromosome" size="10" optional="true"/>
     <param name="start"        type="integer" value="" label="Start" optional="true"/>
     <param name="end"          type="integer" value="" label="End" optional="true"/>
     <param name="threshold"    type="boolean" checked="true" label="Use Threshold"/>
     <param name="thresholdValue" type="integer" value="10" label="Threshold Value"/>
-    <param name="thresholdPercentage" type="float" value="35" label="Threshold Percentage (%)"/>
-    <param name="hthres"       type="float"   value="0.4" label="Peak height Threshold"/>
-    <param name="wthres"       type="float"   value="0.6" label="Peak width Threshold"/>
+    <param name="thresholdPercentage" type="float" value="35" label="Background level (%)" help="Minimum number of reads (Coverage) to call a nucleosome. Can be given as a percentage (i.e., '25%' means that the peaks with coverage in the 1st quartile of data won't be considered); or as an absolute coverage value (i.e., '20' means that the peaks with less than 20 reads per million of mapped reads won't be considered). Default = 35%" />
+    <param name="hthres"       type="float"   value="0.4" label="Height Threshold" help="Height threshold (between 0 and 1) to classify a nucleosome as fuzzy (class=F) or well-positioned ( class=W) according to the number of reads at the dyad. Nucleosomes below this value will be defined as fuzzy."/>
+    <param name="wthres"       type="float"   value="0.6" label="Width Threshold" help="Width threshold (between 0 and 1) to classify a nucleosome as fuzzy (class=F) or well-positioned (class=W) according to the dispersion of the reads around the dyad."/>
     <param name="fdrOverAmp"   type="float"   value="0.05" label="fdrOverAmp"/>
-    <param name="pcKeepComp"   type="float"   value="0.02" label="pcKeepComp"/>
-    <param name="trim"         type="integer" value="50" label="Trim"/>
+    <param name="pcKeepComp"   type="float"   value="0.02" label="Coverage Smoothing" help="Parameter used in the smoothing when Fourier transformation is applied. Number of components to select with respect to the total size of the sample. llowed values are numeric (in range 0:1) for manual setting, or auto for automatic detection."/>
+    <param name="trim"         type="integer" value="50" label="Trim" />
 </inputs>
   <outputs>
     <data format="gff" name="output_gff_file" label="${rdata_file.name}.gff"/>
