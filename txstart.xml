@@ -1,16 +1,16 @@
-<tool id="txstart" name="txstart" version="0.1">
+<tool id="txstart" name="TSS classification" version="0.1">
   <requirements>
-    <container type="docker">mmbirb/nucldyn</container>
+  <requirement type="binary">docker</requirement>
   </requirements>
-  <description>Classify nucleosomes at TSS</description>
+  <description>: classify nucleosomes at Transcription Start Sites (TSS)</description>
   <command>
-    docker run -v /gpfs/database/files:/data_dir -u 1000  mmbirb/nucldyn galaxy txstart --calls $gff_file --genome $ref_genome_gff_file  --output $output_gff_file --window $window --open_thres $open_thres > $log_file 2> /dev/null
+    docker run -v /galaxy-central/database/files:/data_dir -u `id -u`:`id -g`  mmbirb/nucldyn:v0.3 galaxy txstart --calls $gff_file --genome $ref_genome_gff_file  --output $output_gff_file --window $window --open_thres $open_thres > $log_file 2> /dev/null
   </command>
   <inputs>
     <param name="gff_file" type="data" format="gff" label="Nucleosome calls"/>
     <param name="ref_genome_gff_file" type="data" format="gff" label="Reference genes (GFF)"/>
-    <param name="window" size="4" type="integer" value="300" label="Window size" />  
-    <param name="open_thres" size="4" type="integer" value="215" label="Opening threshold" />  
+    <param name="window" size="4" type="integer" value="300" label="Window" help="Number of nucleotides on each side of the TSS where -1 and +1 nucleosome are search for." />  
+    <param name="open_thres" size="4" type="integer" value="215" label="Open threshold" help="Distance between nucleosomes -1 and +1 to discriminate between 'open' and 'close' classes." />  
 </inputs>
   <outputs>
     <data format="gff" name="output_gff_file" label="${gff_file.name}.TSS.gff"/>

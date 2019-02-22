@@ -1,10 +1,10 @@
-<tool id="periodicity" name="Periodicity" version="0.1">
+<tool id="periodicity" name="Nucleosome Gene Phasing" version="0.1">
   <requirements>
-    <container type="docker">mmbirb/nucldyn</container>
+  <requirement type="binary">docker</requirement>
   </requirements>
-  <description>Analyze periodicity of nucleosome positions within genes</description>
+  <description>: analyze periodicity of nucleosome positions within genes</description>
   <command>
-    docker run -v /gpfs/database/files:/data_dir -u 1000  mmbirb/nucldyn galaxy periodicity --calls $gff_file --reads $rdata_file --gffOutput $output_gff_file --type $seq_type --bwOutput $bwOutput_file --genes $ref_genes_gff_file --chrom_sizes $ref_chrom_sizes --periodicity $periodicity > $log_file
+    docker run -v /galaxy-central/database/files:/data_dir -u `id -u`:`id -g`  mmbirb/nucldyn:v0.3 galaxy periodicity --calls $gff_file --reads $rdata_file --gffOutput $output_gff_file --type $seq_type --bwOutput $bwOutput_file --genes $ref_genes_gff_file --chrom_sizes $ref_chrom_sizes --periodicity $periodicity > $log_file
   </command>
   <inputs>
     <param name="gff_file" type="data" format="gff" label="Nucleosome Calls"/>
@@ -15,7 +15,7 @@
     </param>
     <param name="ref_genes_gff_file" type="data" format="gff" label="Reference genes (GFF)"/>
     <param name="ref_chrom_sizes" type="data" format="gg" label="Reference chromosome sizes"/>
-    <param name="periodicity" size="4" type="integer" value="165" label="Periodicity (bp)" />  
+    <param name="periodicity" size="4" type="integer" value="165" label="Period" help="Average distance between two consecutive nucleosomes (repeat length)." />  
 </inputs>
   <outputs>
     <data format="gff" name="output_gff_file" label="${gff_file.name}.P.gff"/>

@@ -1,15 +1,15 @@
-<tool id="stiffness" name="stiffness" version="0.1">
+<tool id="stiffness" name="Stiffness" version="0.1">
   <requirements>
-    <container type="docker">mmbirb/nucldyn</container>
+  <requirement type="binary">docker</requirement>
   </requirements>
-  <description>Analyze stiffness of nucleosome positioning</description>
+  <description>: analyze stiffness of nucleosome positioning</description>
   <command>
-    docker run -v /gpfs/database/files:/data_dir -u 1000  mmbirb/nucldyn galaxy stiffness --calls $gff_file --reads $rdata_file --output $output_gff_file --range $range > $log_file 
+    docker run -v /galaxy-central/database/files:/data_dir -u `id -u`:`id   mmbirb/nucldyn:v0.3 galaxy stiffness --calls $gff_file --reads $rdata_file --output $output_gff_file --range $range > $log_file 
   </command>
   <inputs>
     <param name="gff_file" type="data" format="gff" label="Nucleosome calls"/>
     <param name="rdata_file" type="data" format="rdata" label="Sequence reads (RData)"/>
-    <param name="range" size="4" type="text" value="All" label="Range" />  
+    <param name="range" size="4" type="text" value="All" label="Genomic Range" help="Genomic region to be analyzed: whole genome ('all'), entire chromosome (chromosome name i.e. 'chrX'), or region of a chromosome ('chromosomeName:start-end)." />  
 </inputs>
   <outputs>
     <data format="gff" name="output_gff_file" label="${gff_file.name}.STF.gff"/>

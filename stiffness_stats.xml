@@ -1,10 +1,10 @@
 <tool id="stiffness_stats" name="stiffness Statistics" version="0.1">
   <requirements>
-    <container type="docker">mmbirb/nucldyn</container>
-  </requirements>
-  <description>Gather gene and genome-wide statistics on nucleosome position stiffness</description>
+ <requirement type="binary">docker</requirement>
+ </requirements>
+  <description>: gather gene and genome-wide statistics on nucleosome position stiffness</description>
   <command>
-    docker run -v /gpfs/database/files:/data_dir -v /gpfs/database/files:/public_dir -u 1000  mmbirb/nucldyn galaxy nucleR_stats --input $gff_file --out_genes $output_genes_csv_file --out_gw $output_gw_csv_file --genome $ref_genome_gff_file > $log_file 
+    docker run -v /galaxy-central/database/files:/data_dir -v /galaxy-central/database/files:/public_dir -u `id -u`:`id -g` mmbirb/nucldyn:v0.3 galaxy nucleR_stats --input $gff_file --out_genes $output_genes_csv_file --out_gw $output_gw_csv_file --genome $ref_genome_gff_file > $log_file 
   </command>
   <inputs>
     <param name="gff_file" type="data" format="gff" label="Input Nucleosome Calls"/>

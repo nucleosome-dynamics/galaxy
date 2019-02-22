@@ -1,10 +1,10 @@
-<tool id="periodicity_stats" name="periodicity Statistics" version="0.1">
+<tool id="periodicity_stats" name="Nucleosome Gene Phasing Statistics" version="0.1">
   <requirements>
-    <container type="docker">mmbirb/nucldyn</container>
+  <requirement type="binary">docker</requirement>
   </requirements>
-  <description>Gather gene and genome-wide statistics on periodicity</description>
+  <description>: gather gene and genome-wide statistics on Nucleosome Gene Phasing</description>
   <command>
-    docker run -v /gpfs/database/files:/data_dir -u 1000  mmbirb/nucldyn galaxy periodicity_stats --input $gff_file --out_genes $output_genes_csv_file --out_gw $output_gw_csv_file --genome $ref_genome_gff_file > $log_file 
+    docker run -v /galaxy-central/database/files:/data_dir -u `id -u`:`id -g` mmbirb/nucldyn:v0.3 galaxy periodicity_stats --input $gff_file --out_genes $output_genes_csv_file --out_gw $output_gw_csv_file --genome $ref_genome_gff_file > $log_file 
   </command>
   <inputs>
     <param name="gff_file" type="data" format="gff" label="Input Nucleosome Calls"/>
