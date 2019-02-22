@@ -4,34 +4,32 @@
   </requirements>
   <description>: detection of local changes in the position of nucleosomes, observed between two reference nucleosome maps </description>
   <command>
-    docker run -v /galaxy-central/database/files:/data_dir -u `id -u`:`id -g` mmbirb/nucldyn:v0.3 galaxy NucDyn --input1 $rdata_file --input2 $rdata_file2 --outputGff $output_gff_file --outputBigWig $--type $seq_type --width $width --minoverlap $minoverlap --dyad_length $dyad_length --thresholdPercentage $thresholdPercentage --hthresh $hthres --wthresh $wthres --pcKeepComp $pcKeepComp --fdrOverAmp $fdrOverAmp --components 1  --trim $trim --threshold $threshold --thresholdValue $thresholdValue --fragmentLen $fragmentLen > $log_file 2> /dev/null
+    docker run -v /galaxy-central/database/files:/data_dir -u `id -u`:`id -g` mmbirb/nucldyn:v0.3 glaxy NucDyn --input1 $rdata_file --input2 $rdata_file2 --outputGff $output_gff_file --outputBigWig $output_bw_file --plotRData $plot_RData_file --genome $   --range $range --maxDiff $maxdiff --maxLen $maxlen --shift_min_nreads $minreads --shift_threshold $threshold --indel_min_nreads $minread --indel_threshold $indthreshold --cores $cores --equal_size $equal --readSize $readsize --roundPow $pow --same_magnitude $magnitude
   </command>
   <inputs>
-    <param name="rdata_file" type="data" format="rdata" label="Input RData"/>
-    <param name="rdata_file2" type="data" format="rdata" label="Input RData2"/>
-    <param name="seq_type" type="select" label="Type of sequence reads">
-      <option value="single">Single</option>
-      <option value="paired">Paired</option>
-    </param>
-    <param name="width" size="4" type="integer" value="147" label="Width" help="Size of each nucleosome, in bp."/>  
-    <param name="minoverlap"   type="integer" value="80" label="Minimum Overlap (bp)" help="Minimum overlap between two nucleosomes for merging them."/>
-    <param name="dyad_length"  type="integer" value="50" label="Dyad length (bp)" help="Lenght of the reads that should be used for nucleosome calling to define the dyad of the nuclesomes keeping the number of bases around the center of the read."/>
-    <param name="fragmentLen"  type="integer" value="170" label="Fragment Length (bp)"/>
-    <param name="chr"          type="text"    value="" label="Chromosome" size="10" optional="true"/>
-    <param name="start"        type="integer" value="" label="Start" optional="true"/>
-    <param name="end"          type="integer" value="" label="End" optional="true"/>
-    <param name="threshold"    type="boolean" checked="true" label="Use Threshold"/>
-    <param name="thresholdValue" type="integer" value="10" label="Threshold Value"/>
-    <param name="thresholdPercentage" type="float" value="35" label="Background level (%)" help="Minimum number of reads (Coverage) to call a nucleosome. Can be given as a percentage (i.e., '25%' means that the peaks with coverage in the 1st quartile of data won't be considered); or as an absolute coverage value (i.e., '20' means that the peaks with less than 20 reads per million of mapped reads won't be considered). Default = 35%" />
-    <param name="hthres"       type="float"   value="0.4" label="Height Threshold" help="Height threshold (between 0 and 1) to classify a nucleosome as fuzzy (class=F) or well-positioned ( class=W) according to the number of reads at the dyad. Nucleosomes below this value will be defined as fuzzy."/>
-    <param name="wthres"       type="float"   value="0.6" label="Width Threshold" help="Width threshold (between 0 and 1) to classify a nucleosome as fuzzy (class=F) or well-positioned (class=W) according to the dispersion of the reads around the dyad."/>
-    <param name="fdrOverAmp"   type="float"   value="0.05" label="fdrOverAmp"/>
-    <param name="pcKeepComp"   type="float"   value="0.02" label="Coverage Smoothing" help="Parameter used in the smoothing when Fourier transformation is applied. Number of components to select with respect to the total size of the sample. llowed values are numeric (in range 0:1) for manual setting, or auto for automatic detection."/>
-    <param name="trim"         type="integer" value="50" label="Trim" />
+    <param name="rdata_file" type="data" format="rdata" label="MNase-seq reference state (condition C1)" help="MNase data used to define the initial state  when comparing nucleosome positioning."/>
+    <param name="rdata_file2" type="data" format="rdata" label="MNase-seq reference state (condition C2)" help="MNase data used to define the initial state  when comparing nucleosome positioning."/>
+    <param name="ref_chrom_sizes" type="data" format="txt" label="Reference genome chromosome sizes"/>
+
+    <param name="range"  type="text" value="All" label="Range" help="Genomic region to be analyzed: whole genome ('all'), entire chromosome (chromosome name i.e. 'chrX'), or region of a chromosome."/>  
+    <param name="maxdiff"   type="integer" value="70" label="Maximum Diff" help="Maximum distance between the dyads of two reads that allows them to still be considered a <i>shift</i>. If unspecified but <i>readSize</i> is specified, it will be set to the half of readSize. If neither of them is specified, it will be set to 70."/>
+    <param name="maxlen"  type="integer" value="140" label="Maximum Lenght" help="Used in the preliminar filtering. Reads longer than this number will be filtered out."/>
+    <param name="minreads"  type="integer" value="3" label="Shift minimum num. reads" help="Minimum number of reads in a 'SHIFT +' or a 'SHIFT -' hotspot."/>
+    <param name="threshold" type="float"    value="0.1" label="Shifts threshold" help="Minimum score for a 'SHIFT +' or a 'SHIFT -' hotspot."/>
+    <param name="minread"   type="integer" value="3" label="Indels minimum num. reads" help="Minimum number of reads in an 'INCLUSION +' or a 'DELETION -' hotspot" />
+    <param name="indthreshold"  type="float" value="0.05" label="Indels threshold" help="Minimum score for an 'INCLUSION' or a 'DELETION' hotspot." />
+    <param name="cores" type="integer" value="1" label="Cores" help="Number of computer threads." />
+    <param name="equal" type="boolean" checked="false" label="Use Equal Size" optional="True" help="Set all fragments to the same size."/>
+    <param name="readsize" type="integer" value="140" label="Read Size" />
+    <param name="pow" type="boolean" checked="true" label="Round Pow" />
+    <param name="magnitude" type="boolean" checked="true" label="Same Magnitude" />
+
 </inputs>
   <outputs>
-    <data format="gff" name="output_gff_file" label="${rdata_file.name}.gff"/>
-    <data format=
+    <data format="gff" name="output_gff_file" label="${rdata_file.name}.{rdata_file2.name}gff"/>
+    <data format="bw" name="output_bw_file" label="${rdata_file.name}.{rdata_file2.name}.bw" />
+    <data format="RData" name="plot_RData_file" label="${rdata_file.name}.{rdata_file2.name}.RData" />
+    <data format="chrom.sizes
     <data format="txt" name="log_file" label="${rdata_file.name}.nucDyn.log"/>
   </outputs>
 </tool>

@@ -14,12 +14,12 @@
       <option value="paired">Paired</option>
     </param>
     <param name="ref_genes_gff_file" type="data" format="gff" label="Reference genes (GFF)"/>
-    <param name="ref_chrom_sizes" type="data" format="gg" label="Reference chromosome sizes"/>
+    <param name="ref_chrom_sizes" type="data" format="txt" label="Reference chromosome sizes"/>
     <param name="periodicity" size="4" type="integer" value="165" label="Period" help="Average distance between two consecutive nucleosomes (repeat length)." />  
 </inputs>
   <outputs>
-    <data format="gff" name="output_gff_file" label="${gff_file.name}.P.gff"/>
-    <data format="bigwig" name="bwOutput_file" label="${gff_file.name}.P.bigwig"/>
-    <data format="txt" name="log_file" label="${gff_file.name}.P.log"/>
+    <data format="gff" name="output_gff_file" label="${gff_file.name}.period.gff"/>
+    <data format="bigwig" name="bwOutput_file" label="${gff_file.name}.period.bigwig"/>
+    <data format="txt" name="log_file" label="${gff_file.name}.period.log"/>
   </outputs>
 </tool>
