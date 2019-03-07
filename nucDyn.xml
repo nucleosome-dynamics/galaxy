@@ -4,15 +4,14 @@
   </requirements>
   <description>: detection of local changes in the position of nucleosomes, observed between two reference nucleosome maps </description>
   <command>
-    docker run -v /galaxy-central/database/files:/data_dir -u `id -u`:`id -g` mmbirb/nucldyn:v0.3 glaxy NucDyn --input1 $rdata_file --input2 $rdata_file2 --outputGff $output_gff_file --outputBigWig $output_bw_file --plotRData $plot_RData_file --genome $   --range $range --maxDiff $maxdiff --maxLen $maxlen --shift_min_nreads $minreads --shift_threshold $threshold --indel_min_nreads $minread --indel_threshold $indthreshold --cores $cores --equal_size $equal --readSize $readsize --roundPow $pow --same_magnitude $magnitude
+    docker run -v $__root_dir__/database/files:/data_dir -u `id -u`:`id -g` mmbirb/nucldyn:v0.3 glaxy NucDyn --input1 $rdata_file --input2 $rdata_file2 --outputGff $output_gff_file --outputBigWig $output_bw_file --plotRData $plot_RData_file --genome $ref_chrom_sizes  --range $range --maxDiff $maxdiff --maxLen $maxlen --shift_min_nreads $minreads --shift_threshold $threshold --indel_min_nreads $minread --indel_threshold $indthreshold --cores $cores --equal_size $equal --readSize $readsize --roundPow $pow --same_magnitude $magnitude
   </command>
   <inputs>
     <param name="rdata_file" type="data" format="rdata" label="MNase-seq reference state (condition C1)" help="MNase data used to define the initial state  when comparing nucleosome positioning."/>
     <param name="rdata_file2" type="data" format="rdata" label="MNase-seq reference state (condition C2)" help="MNase data used to define the initial state  when comparing nucleosome positioning."/>
     <param name="ref_chrom_sizes" type="data" format="txt" label="Reference genome chromosome sizes"/>
-
     <param name="range"  type="text" value="All" label="Range" help="Genomic region to be analyzed: whole genome ('all'), entire chromosome (chromosome name i.e. 'chrX'), or region of a chromosome."/>  
-    <param name="maxdiff"   type="integer" value="70" label="Maximum Diff" help="Maximum distance between the dyads of two reads that allows them to still be considered a <i>shift</i>. If unspecified but <i>readSize</i> is specified, it will be set to the half of readSize. If neither of them is specified, it will be set to 70."/>
+    <param name="maxdiff" type="integer" value="70" label="Maximum Diff" help="Maximum distance between the dyads of two reads that allows them to still be considered a *shift*. If unspecified but *readSize* is specified, it will be set to the half of readSize. If neither of them is specified, it will be set to 70."/>
     <param name="maxlen"  type="integer" value="140" label="Maximum Lenght" help="Used in the preliminar filtering. Reads longer than this number will be filtered out."/>
     <param name="minreads"  type="integer" value="3" label="Shift minimum num. reads" help="Minimum number of reads in a 'SHIFT +' or a 'SHIFT -' hotspot."/>
     <param name="threshold" type="float"    value="0.1" label="Shifts threshold" help="Minimum score for a 'SHIFT +' or a 'SHIFT -' hotspot."/>
@@ -23,13 +22,11 @@
     <param name="readsize" type="integer" value="140" label="Read Size" />
     <param name="pow" type="boolean" checked="true" label="Round Pow" />
     <param name="magnitude" type="boolean" checked="true" label="Same Magnitude" />
-
 </inputs>
   <outputs>
-    <data format="gff" name="output_gff_file" label="${rdata_file.name}.{rdata_file2.name}gff"/>
-    <data format="bw" name="output_bw_file" label="${rdata_file.name}.{rdata_file2.name}.bw" />
-    <data format="RData" name="plot_RData_file" label="${rdata_file.name}.{rdata_file2.name}.RData" />
-    <data format="chrom.sizes
-    <data format="txt" name="log_file" label="${rdata_file.name}.nucDyn.log"/>
+    <data format="gff" name="output_gff_file" label="nuclDyn_${os.path.splitext(os.path.basename($rdata_file.name.rdata_file2.name))[0]}.gff"/>
+    <data format="bw" name="output_bw_file" label="nuclDyn_${os.path.splitext(os.path.basename($rdata_file.name.rdata_file2.name))[0]}.bw"/>
+    <data format="rdata" name="plot_RData_file" label="nuclDyn_${os.path.splitext(os.path.basename($rdata_file.name.rdata_file2.name))[0]}.rdata"/>  
+    <data format="txt" name="log_file" label="nuclDyn_${os.path.splitext(os.path.basename($rdata_file.name.rdata_file2.name))[0]}.log"/>
   </outputs>
 </tool>

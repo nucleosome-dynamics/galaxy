@@ -4,7 +4,7 @@
   </requirements>
   <description>: classify nucleosomes at Transcription Start Sites (TSS)</description>
   <command>
-    docker run -v /galaxy-central/database/files:/data_dir -u `id -u`:`id -g`  mmbirb/nucldyn:v0.3 galaxy txstart --calls $gff_file --genome $ref_genome_gff_file  --output $output_gff_file --window $window --open_thres $open_thres > $log_file 2> /dev/null
+    docker run -v $__root_dir__/database/files:/data_dir -u `id -u`:`id -g`  mmbirb/nucldyn:v0.3 galaxy txstart --calls $gff_file --genome $ref_genome_gff_file  --output $output_gff_file --window $window --open_thres $open_thres > $log_file 
   </command>
   <inputs>
     <param name="gff_file" type="data" format="gff" label="Nucleosome calls"/>
@@ -13,7 +13,7 @@
     <param name="open_thres" size="4" type="integer" value="215" label="Open threshold" help="Distance between nucleosomes -1 and +1 to discriminate between 'open' and 'close' classes." />  
 </inputs>
   <outputs>
-    <data format="gff" name="output_gff_file" label="${gff_file.name}.TSS.gff"/>
-    <data format="txt" name="log_file" label="${gff_file.name}.TSS.log"/>
+    <data format="gff" name="output_gff_file" label="TSS_${os.path.splitext(os.path.basename($gff_file.name))[0]}.gff" />
+    <data format="txt" name="log_file" label="TSS_${os.path.splitext(os.path.basename($gff_file.name))[0]}.log" />
   </outputs>
 </tool>

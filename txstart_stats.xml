@@ -4,16 +4,16 @@
   </requirements>
   <description>: gather gene and genome-wide statistics on nucleosomes at TSS</description>
   <command>
-    docker run -v /galaxy-central/database/files:/data_dir -u `id -u`:`id -g`  mmbirb/nucldyn:v0.3 galaxy txstart_stats --input $gff_file --out_genes $output_genes_csv_file --out_gw $output_gw_png_file --genome $ref_genome_gff_file --out_gw2 $output_gw2_png_file > $log_file 
+    docker run -v $__root_dir__/database/files:/data_dir -u `id -u`:`id -g`  mmbirb/nucldyn:v0.3 galaxy txstart_stats --input $gff_file --out_genes $output_genes_csv_file --out_gw $output_gw_png_file --genome $ref_genome_gff_file --out_gw2 $output_gw2_png_file > $log_file 
   </command>
   <inputs>
     <param name="gff_file" type="data" format="gff" label="Input Nucleosome Calls"/>
     <param name="ref_genome_gff_file" type="data" format="gff" label="Reference genes (GFF)"/>
 </inputs>
   <outputs>
-    <data format="csv" name="output_genes_csv_file" label="${gff_file.name}.TSS_stats.genes.csv"/>
-    <data format="png" name="output_gw_png_file" label="${gff_file.name}.TSS_stats.gw.png"/>
-    <data format="png" name="output_gw2_png_file" label="${gff_file.name}.TSS_stats.gw2.png"/>
-    <data format="txt" name="log_file" label="${gff_file.name}.TSS_stats.log"/>
+    <data format="csv" name="output_genes_csv_file" label="TSS_stats_${os.path.splitext(os.path.basename($gff_file.name))[0]}.genes.csv" />
+    <data format="png" name="output_gw_png_file" label="TSS_stats_${os.path.splitext(os.path.basename($gff_file.name))[0]}.gw.png" />
+    <data format="png" name="output_gw2_png_file" label="TSS_stats_${os.path.splitext(os.path.basename($gff_file.name))[0]}.gw2.png" />
+    <data format="txt" name="log_file" label="TSS_stats_${os.path.splitext(os.path.basename($gff_file.name))[0]}.log" />
   </outputs>
 </tool>

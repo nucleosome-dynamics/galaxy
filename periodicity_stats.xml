@@ -4,15 +4,15 @@
   </requirements>
   <description>: gather gene and genome-wide statistics on Nucleosome Gene Phasing</description>
   <command>
-    docker run -v /galaxy-central/database/files:/data_dir -u `id -u`:`id -g` mmbirb/nucldyn:v0.3 galaxy periodicity_stats --input $gff_file --out_genes $output_genes_csv_file --out_gw $output_gw_csv_file --genome $ref_genome_gff_file > $log_file 
+    docker run -v $__root_dir__/database/files:/data_dir -u `id -u`:`id -g` mmbirb/nucldyn:v0.3 galaxy periodicity_stats --input $gff_file --out_genes $output_genes_csv_file --out_gw $output_gw_csv_file --genome $ref_genome_gff_file > $log_file 
   </command>
   <inputs>
     <param name="gff_file" type="data" format="gff" label="Input Nucleosome Calls"/>
     <param name="ref_genome_gff_file" type="data" format="gff" label="Reference genes (GFF)"/>
 </inputs>
   <outputs>
-    <data format="csv" name="output_genes_csv_file" label="${gff_file.name}.P_stats.genes.csv"/>
-    <data format="csv" name="output_gw_csv_file" label="${gff_file.name}.P_stats.gw.csv"/>
-    <data format="txt" name="log_file" label="${gff_file.name}.P_stats.log"/>
+    <data format="csv" name="output_genes_csv_file" label="period_stats_${os.path.splitext(os.path.basename($gff_file.name))[0]}.genes.csv" />
+    <data format="csv" name="output_gw_csv_file" label="period_stats_${os.path.splitext(os.path.basename($bam_file.name))[0]}.gw.csv" />
+    <data format="txt" name="log_file" label="period_stats_${os.path.splitext(os.path.basename($gff_file.name))[0]}.log" />
   </outputs>
 </tool>

@@ -4,7 +4,7 @@
   </requirements>
   <description>: analyze periodicity of nucleosome positions within genes</description>
   <command>
-    docker run -v /galaxy-central/database/files:/data_dir -u `id -u`:`id -g`  mmbirb/nucldyn:v0.3 galaxy periodicity --calls $gff_file --reads $rdata_file --gffOutput $output_gff_file --type $seq_type --bwOutput $bwOutput_file --genes $ref_genes_gff_file --chrom_sizes $ref_chrom_sizes --periodicity $periodicity > $log_file
+    docker run -v $__root_dir__/database/files:/data_dir -u `id -u`:`id -g`  mmbirb/nucldyn:v0.3 galaxy periodicity --calls $gff_file --reads $rdata_file --gffOutput $output_gff_file --type $seq_type --bwOutput $bwOutput_file --genes $ref_genes_gff_file --chrom_sizes $ref_chrom_sizes --periodicity $periodicity > $log_file
   </command>
   <inputs>
     <param name="gff_file" type="data" format="gff" label="Nucleosome Calls"/>
@@ -18,8 +18,8 @@
     <param name="periodicity" size="4" type="integer" value="165" label="Period" help="Average distance between two consecutive nucleosomes (repeat length)." />  
 </inputs>
   <outputs>
-    <data format="gff" name="output_gff_file" label="${gff_file.name}.period.gff"/>
-    <data format="bigwig" name="bwOutput_file" label="${gff_file.name}.period.bigwig"/>
-    <data format="txt" name="log_file" label="${gff_file.name}.period.log"/>
+    <data format="gff" name="output_gff_file" label="period_${os.path.splitext(os.path.basename($gff_file.name))[0]}.gff" />
+    <data format="bigwig" name="bwOutput_file" label="period_${os.path.splitext(os.path.basename($gff_file.name))[0]}.bigwig" />
+    <data format="txt" name="log_file" label="period_${os.path.splitext(os.path.basename($gff_file.name))[0]}.log" />
   </outputs>
 </tool>

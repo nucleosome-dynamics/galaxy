@@ -4,7 +4,7 @@
     </requirements>
 <description>: determine Nucleosome Free Regions from nucleR nucleosome calls</description>
   <command>
-    docker run -v /galaxy-central/database/files:/data_dir -u `id -u`:`id -g`  mmbirb/nucldyn:v0.3 galaxy NFR --input $gff_file --output $output_gff_file --minwidth $minwidth --threshold $threshold > $log_file 
+    docker run -v $__root_dir__/database/files:/data_dir -u `id -u`:`id -g`  mmbirb/nucldyn:v0.3 galaxy NFR --input $gff_file --output $output_gff_file --minwidth $minwidth --threshold $threshold > $log_file 
   </command>
   <inputs>
     <param name="gff_file" type="data" format="gff" label="Nucleosome Calls"/>
@@ -12,7 +12,7 @@
     <param name="threshold" size="4" type="integer" value="140" label="Maximum Width" help="Maximum width for a linker fragment to be considered a nucleosome-free region." />  
 </inputs>
   <outputs>
-    <data format="gff" name="output_gff_file" label="${gff_file.name}.NFR.gff"/>
-    <data format="txt" name="log_file" label="${gff_file.name}.NFR.log"/>
+     <data format="gff" name="output_gff_file" label="NFR_${os.path.splitext(os.path.basename($gff_file.name))[0]}.gff" />
+     <data format="txt" name="log_file" label="NFR_${os.path.splitext(os.path.basename($gff_file.name))[0]}.log" />
   </outputs>
 </tool>
