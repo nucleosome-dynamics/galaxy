@@ -1,0 +1,19 @@
+<tool id="nucDyn_stats" name="Nucleosome Dynamics Statistics" version="0.1">
+  <requirements>
+ <requirement type="binary">docker</requirement>
+ </requirements>
+  <description>: statistics on Nucleosome Dynamics analysis</description>
+  <command>
+    ln -f -s $output_gw_png_file $output_gw_png_file.png	  
+    docker run -v $__root_dir__/database/files:/data_dir -v $__root_dir__/database/files:/public_dir -u `id -u`:`id -g` mmbirb/nucldyn:galaxy galaxy nucDyn_stats  --input $gff_file --out_genes $output_genes_csv_file  --out_gw $output_gw_png_file.png --genome $ref_genome_gff_file  2>&amp;1;
+    mv $output_gw_png_file.png $output_gw_png_file
+  </command>
+  <inputs>
+    <param name="gff_file" type="data" format="gff" label="Input Nucleosome Calls"/>
+    <param name="ref_genome_gff_file" type="data" format="gff" label="Reference genes (GFF)"/>
+</inputs>
+  <outputs>
+    <data format="csv" name="output_genes_csv_file" label="nucDyn_stats_${os.path.splitext(os.path.basename($gff_file.name))[0]}.genes.csv" />
+    <data format="png" name="output_gw_png_file" label="nucDyn_stats_${os.path.splitext(os.path.basename($gff_file.name))[0]}.gw.png" />
+  </outputs>
+</tool>

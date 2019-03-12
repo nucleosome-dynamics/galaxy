@@ -4,7 +4,7 @@
   </requirements>
   <description>: analyze stiffness of nucleosome positioning</description>
   <command>
-    docker run -v $__root_dir__/database/files:/data_dir -u `id -u`:`id -g`   mmbirb/nucldyn:v0.3 galaxy stiffness --calls $gff_file --reads $rdata_file --output $output_gff_file --range $range > $log_file 
+    docker run -v $__root_dir__/database/files:/data_dir -u `id -u`:`id -g`   mmbirb/nucldyn:galaxy galaxy stiffness --calls $gff_file --reads $rdata_file --output $output_gff_file --range $range 2>&amp;1
   </command>
   <inputs>
     <param name="gff_file" type="data" format="gff" label="Nucleosome calls"/>
@@ -13,6 +13,5 @@
 </inputs>
   <outputs>
     <data format="gff" name="output_gff_file" label="stiffness_${os.path.splitext(os.path.basename($gff_file.name))[0]}.gff" />
-    <data format="txt" name="log_file" label="stiffness_${os.path.splitext(os.path.basename($gff_file.name))[0]}.log" />
   </outputs>
 </tool>
