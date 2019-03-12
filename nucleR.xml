@@ -4,7 +4,7 @@
   </requirements>
   <description>: analyze aligned BAM files from MNAse (in RData format)</description>
   <command>
-    docker run -v $__root_dir__/database/files:/data_dir -u `id -u`:`id -g` mmbirb/nucldyn:galaxy galaxy nucleR --input $rdata_file --output $output_gff_file --type $seq_type --width $width --minoverlap $minoverlap --dyad_length $dyad_length --thresholdPercentage $thresholdPercentage --hthresh $hthres --wthresh $wthres --pcKeepComp $pcKeepComp --fdrOverAmp $fdrOverAmp --components 1  --trim $trim --threshold $threshold --thresholdValue $thresholdValue --fragmentLen $fragmentLen 2>&amp;1
+    docker run -v $__root_dir__/database/files:$__root_dir__/database/files -u `id -u`:`id -g` mmbirb/nucldyn:galaxy0.3 nucleR --input $rdata_file --output $output_gff_file --type $seq_type --width $width --minoverlap $minoverlap --dyad_length $dyad_length --thresholdPercentage $thresholdPercentage --hthresh $hthres --wthresh $wthres --pcKeepComp $pcKeepComp --fdrOverAmp $fdrOverAmp --components 1  --trim $trim --threshold $threshold --thresholdValue $thresholdValue --fragmentLen $fragmentLen 2>&amp;1
   </command>
   <inputs>
     <param name="rdata_file" type="data" format="rdata" label="Input RData"/>

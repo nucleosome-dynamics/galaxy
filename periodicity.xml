@@ -4,9 +4,15 @@
   </requirements>
   <description>: analyze periodicity of nucleosome positions within genes</description>
   <command>
-	  ln -f -s $bwOutput_file $bwOutput_file\.bw;
-	  docker run -v $__root_dir__/database/files:/data_dir -u `id -u`:`id -g`  mmbirb/nucldyn:galaxy galaxy periodicity --calls $gff_file --reads $rdata_file --gffOutput $output_gff_file --type $seq_type --bwOutput /data_dir/tmp.bw --genes $ref_genes_gff_file --chrom_sizes $ref_chrom_sizes --periodicity $periodicity 2>&amp;1;
-	mv  tmp.bw $bwOutput_file
+	ln -f -s $bwOutput_file $bwOutput_file\.bw;
+	docker run -v $__root_dir__/database/files:$__root_dir__/database/files -v $__root_dir__/data:$__root_dir__/data -u `id -u`:`id -g`  mmbirb/nucldyn:galaxy0.3  periodicity --calls $gff_file --reads $rdata_file 
+ 	#if $assembly.source == "buildin":
+	--chrom_sizes ${assembly.ref_chrom_sizes_buildin} --genes ${assembly.ref_genome_gff_buildin} 
+	#else if $assembly.source == "history":
+	--chrom_sizes ${assembly.ref_chrom_sizes} --genes ${assembly.ref_genome_gff_history}
+	#end if
+	--gffOutput $output_gff_file --type $seq_type --bwOutput $bwOutput_file\.bw --periodicity $periodicity 2>&amp;1;
+	rm  $bwOutput_file\.bw 
 </command>
   <inputs>
     <param name="gff_file" type="data" format="gff" label="Nucleosome Calls"/>
@@ -15,8 +21,30 @@
       <option value="single">Single</option>
       <option value="paired">Paired</option>
     </param>
-    <param name="ref_genes_gff_file" type="data" format="gff" label="Reference genes (GFF)"/>
-    <param name="ref_chrom_sizes" type="data" format="txt" label="Reference chromosome sizes"/>
+    <conditional name="assembly">
+            <param name="source" type="select" label="Select a built-in reference genome or use one from your history" help="Taking from each assembly their chromosome sizes and their annotated genes.">
+                <option value="buildin">Use a built-in genome</option>
+                <option value="history">Use a genome from the history</option>
+            </param>
+            <when value="buildin">
+	    <param name="ref_chrom_sizes_buildin" type="select" label="Select reference genome" help="If your genome of interest is not listed, contact the Galaxy team">
+                    <options from_file="nucldyn_publicdata.loc">
+                        <column name="name" index="1"/>
+                        <column name="value" index="2"/>
+                    </options>
+	    </param>
+	    	<param name="ref_genome_gff_buildin" type="select" label="Select reference genome" help="If your genome of interest is not listed, contact the Galaxy team">
+		   <options from_file="nucldyn_publicdata.loc">
+                        <column name="name" index="1"/>
+                        <column name="value" index="3"/>
+       		</options>
+	    </param>
+	</when>
+            <when value="history">
+                <param name="ref_chrom_sizes" type="data" format="txt" label="Select chromosome size for your reference genome" help="Check below the documentation for lerning about the file format."/>
+		<param name="ref_genome_gff_history" type="data" format="txt" label="Select gene annotations for your reference genome" help="If your genome of interest is not listed, contact the Galaxy team" />
+	</when>
+       </conditional>
     <param name="periodicity" size="4" type="integer" value="165" label="Period" help="Average distance between two consecutive nucleosomes (repeat length)." />  
 </inputs>
   <outputs>

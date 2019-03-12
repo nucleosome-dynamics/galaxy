@@ -4,16 +4,38 @@
   </requirements>
   <description>: detection of local changes in the position of nucleosomes, observed between two reference nucleosome maps </description>
   <command>
-    ln -f -s $output_bw_file $output_bw_file.bw; 
-    docker run -v $__root_dir__/database/files:/data_dir -u `id -u`:`id -g` mmbirb/nucldyn:galaxy galaxy nucDyn --input1 $rdata_file --input2 $rdata_file2 --calls1 $gff_file --calls2 $gff_file2  --outputGff $output_gff_file --outputBigWig $output_bw_file.bw --plotRData $plot_RData_file --genome $ref_chrom_sizes  --range $range --maxDiff $maxdiff --maxLen $maxlen --shift_min_nreads $minreads --shift_threshold $threshold --indel_min_nreads $minread --indel_threshold $indthreshold --cores $cores --equal_size $equal --readSize $readsize --roundPow $pow --same_magnitude $magnitude 2>&amp;1;
-    mv $output_bw_file.bw $output_bw_file  
+    ln -f -s $output_bw_file $output_bw_file\.bw; 
+    docker run -v $__root_dir__/database/files:$__root_dir__/database/files -v  $__root_dir__/data:$__root_dir__/data -u `id -u`:`id -g` mmbirb/nucldyn:galaxy0.3 nucDyn --input1 $rdata_file --input2 $rdata_file2 --calls1 $gff_file --calls2 $gff_file2  --outputGff $output_gff_file --outputBigWig $output_bw_file\.bw --plotRData $plot_RData_file
+    #if $assembly.source == "buildin":
+	--genome ${assembly.ref_chrom_sizes_buildin}
+    #else if $assembly.source == "history":
+    	--genome ${assembly.ref_chrom_sizes}
+    #end if
+    --range $range --maxDiff $maxdiff --maxLen $maxlen --shift_min_nreads $minreads --shift_threshold $threshold --indel_min_nreads $minread --indel_threshold $indthreshold --cores $cores --equal_size $equal --readSize $readsize --roundPow $pow --same_magnitude $magnitude 2>&amp;1;
+    rm $output_bw_file\.bw   
  </command>
   <inputs>
     <param name="rdata_file" type="data" format="rdata" label="MNase-seq reference state (condition C1)" help="MNase data used to define the initial state  when comparing nucleosome positioning."/>
     <param name="rdata_file2" type="data" format="rdata" label="MNase-seq reference state (condition C2)" help="MNase data used to define the initial state  when comparing nucleosome positioning."/>
     <param name="gff_file" type="data" format="gff" label="MNase-seq reference state (condition C1)" help="MNase data used to define the initial state  when comparing nucleosome positioning."/>
     <param name="gff_file2" type="data" format="gff" label="MNase-seq reference state (condition C2)" help="MNase data used to define the initial state  when comparing nucleosome positioning."/>
-    <param name="ref_chrom_sizes" type="data" format="txt" label="Reference genome chromosome sizes"/>
+    <conditional name="assembly">
+	    <param name="source" type="select" label="Select a built-in reference genome or use one from your history" help="Taking from each assembly their chromosome sizes and their annotated genes.">
+	        <option value="buildin">Use a built-in genome</option>
+	        <option value="history">Use a genome from the history</option>
+	    </param>
+	    <when value="buildin">
+    		<param name="ref_chrom_sizes_buildin" type="select" label="Select reference genome" help="If your genome of interest is not listed, contact the Galaxy team">
+		    <options from_file="nucldyn_publicdata.loc">
+		      	<column name="name" index="1"/>
+		        <column name="value" index="2"/>
+		    </options>
+		</param>
+	    </when>
+	    <when value="history">
+    		<param name="ref_chrom_sizes" type="data" format="txt" label="Select chromosome size for your reference genome" help="Check below the documentation for lerning about the file format."/> 
+	    </when>
+       </conditional>
     <param name="range"  type="text" value="All" label="Range" help="Genomic region to be analyzed: whole genome ('all'), entire chromosome (chromosome name i.e. 'chrX'), or region of a chromosome."/>  
     <param name="maxdiff" type="integer" value="70" label="Maximum Diff" help="Maximum distance between the dyads of two reads that allows them to still be considered a *shift*. If unspecified but *readSize* is specified, it will be set to the half of readSize. If neither of them is specified, it will be set to 70."/>
     <param name="maxlen"  type="integer" value="140" label="Maximum Lenght" help="Used in the preliminar filtering. Reads longer than this number will be filtered out."/>

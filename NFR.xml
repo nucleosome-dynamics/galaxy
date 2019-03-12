@@ -4,7 +4,7 @@
     </requirements>
 <description>: determine Nucleosome Free Regions from nucleR nucleosome calls</description>
   <command>
-	  docker run -v $__root_dir__/database/files:/data_dir -u `id -u`:`id -g`  mmbirb/nucldyn:galaxy galaxy NFR --input $gff_file --output $output_gff_file --minwidth $minwidth --threshold $threshold 2>&amp;1 
+	  docker run -v $__root_dir__/database/files:$__root_dir__/database/files -u `id -u`:`id -g`  mmbirb/nucldyn:galaxy0.3 NFR --input $gff_file --output $output_gff_file --minwidth $minwidth --threshold $threshold 2>&amp;1 
   </command>
   <inputs>
     <param name="gff_file" type="data" format="gff" label="Nucleosome Calls"/>

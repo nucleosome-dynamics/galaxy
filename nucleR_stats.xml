@@ -4,11 +4,33 @@
     </requirements>
   <description>: gather gene and genome-wide statistics on NucleR results</description>
   <command>
-    docker run -v $__root_dir__/database/files:/data_dir -v $__root_dir__/database/files:/public_dir -u `id -u`:`id -g` mmbirb/nucldyn:galaxy galaxy nucleR_stats --input $gff_file --out_genes $output_genes_csv_file --out_gw $output_gw_csv_file --genome $ref_genome_gff_file 2>&amp;1 
+	docker run -v $__root_dir__/database/files:$__root_dir__/database/files -v $__root_dir__/data:$__root_dir__/data -u `id -u`:`id -g` mmbirb/nucldyn:galaxy0.3 nucleR_stats --input $gff_file --out_genes $output_genes_csv_file --out_gw $output_gw_csv_file
+       	#if $assembly.source == "buildin":
+                --genome ${assembly.ref_genome_gff_buildin}
+        #else if $assembly.source == "history":
+                --genome ${assembly.ref_genome_gff_history}
+        #end if
+       	2>&amp;1 
   </command>
   <inputs>
     <param name="gff_file" type="data" format="gff" label="Input Nucleosome Calls"/>
-    <param name="ref_genome_gff_file" type="data" format="gff" label="Reference genes (GFF)"/>
+	 <conditional name="assembly">
+            <param name="source" type="select" label="Select a built-in reference genome or use one from your history" help="Taking from each assembly their chromosome sizes and their annotated genes.">
+                <option value="buildin">Use a built-in genome</option>
+                <option value="history">Use a genome from the history</option>
+            </param>
+            <when value="buildin">
+                <param name="ref_genome_gff_buildin" type="select" label="Select reference genome" help="If your genome of interest is not listed, contact the Galaxy team">
+                    <options from_file="nucldyn_publicdata.loc">
+                        <column name="name" index="1"/>
+                        <column name="value" index="3"/>
+                    </options>
+                </param>
+            </when>
+            <when value="history">
+                <param name="ref_genome_gff_history" type="data" format="gff" label="Select gene annotations for your reference genome" help="Check below the documentation for lerning about the file format."/>
+            </when>
+       </conditional>
 </inputs>
   <outputs>
     <data format="csv" name="output_genes_csv_file" label="nucleR_stats_${os.path.splitext(os.path.basename($gff_file.name))[0]}.genes.csv" />
