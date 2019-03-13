@@ -30,7 +30,6 @@
   </inputs>
   <outputs>
     <data format="gff" name="output_gff_file" label="nucleR_${os.path.splitext(os.path.basename($rdata_file.name))[0]}.gff" />
-    ##data format="gff" name="output_gff_file" label="nucleR_${re.sub('readBAM,:','',os.path.basename($rdata_file.name))}.gff" />
   
 </outputs>
 </tool>
