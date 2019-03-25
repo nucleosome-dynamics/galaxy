@@ -4,13 +4,13 @@
   </requirements>
   <description>: classify nucleosomes at Transcription Start Sites (TSS)</description>
   <command>
-	  docker run -v $__root_dir__/database/files:$__root_dir__/database/files -v $__root_dir__/data:$__root_dir__/data -u `id -u`:`id -g`  mmbirb/nucldyn:galaxy0.3 txstart --calls $gff_file 
+	  docker run -v $__root_dir__/database/files:$__root_dir__/database/files -v /data:/data -u `id -u`:`id -g`  mmbirb/nucldyn txstart --calls $gff_file 
 		#if $assembly.source == "buildin":
                 	--genome ${assembly.ref_genome_gff_buildin}
         	#else if $assembly.source == "history":
                 	--genome ${assembly.ref_genome_gff_history}
         	#end if
-	  --output $output_gff_file --window $window --open_thres $open_thres 2>&amp;1 
+	  --output $output_gff_file --window $window --open_thres $open_thres 
   </command>
   <inputs>
     <param name="gff_file" type="data" format="gff" label="Nucleosome calls"/>
@@ -35,6 +35,31 @@
     <param name="open_thres" size="4" type="integer" value="215" label="Open threshold" help="Distance between nucleosomes -1 and +1 to discriminate between 'open' and 'close' classes." />  
 </inputs>
   <outputs>
-    <data format="gff" name="output_gff_file" label="TSS_${os.path.splitext(os.path.basename($gff_file.name))[0]}.gff" />
+    <data format="gff" name="output_gff_file" label="TSS__${os.path.splitext(($gff_file.name.split('__'))[1])[0]}.gff" />
   </outputs>
+     <help>
+.. class:: warningmark
+
+
+Check the documentation for setting the tool parameters at the source code repository: http://mmb.irbbarcelona.org/gitlab/NuclDynamics/docker 
+
+-----
+
+.. image:: ${static_path}/images/NucleosomeDynamicsLogo.png 
+    :height: 80 
+    :width: 200
+
+**http://mmb.irbbarcelona.org/NucleosomeDynamics**
+   </help>
+   <citations>
+        <citation type="bibtex">
+@misc{github,
+  author = {Buitrago D},
+  year = {2019},
+  title = {Nucleosome Dynamics suite: containerized installation},
+  publisher = {GitLab},
+  journal = {GitLab repository},
+  url = {http://mmb.irbbarcelona.org/gitlab/NuclDynamics/docker},
+}</citation>
+ </citations>
 </tool>

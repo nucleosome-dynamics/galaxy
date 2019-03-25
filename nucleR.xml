@@ -4,32 +4,85 @@
   </requirements>
   <description>: analyze aligned BAM files from MNAse (in RData format)</description>
   <command>
-    docker run -v $__root_dir__/database/files:$__root_dir__/database/files -u `id -u`:`id -g` mmbirb/nucldyn:galaxy0.3 nucleR --input $rdata_file --output $output_gff_file --type $seq_type --width $width --minoverlap $minoverlap --dyad_length $dyad_length --thresholdPercentage $thresholdPercentage --hthresh $hthres --wthresh $wthres --pcKeepComp $pcKeepComp --fdrOverAmp $fdrOverAmp --components 1  --trim $trim --threshold $threshold --thresholdValue $thresholdValue --fragmentLen $fragmentLen 2>&amp;1
+	  docker run -v $__root_dir__/database/files:$__root_dir__/database/files -u `id -u`:`id -g` mmbirb/nucldyn nucleR --input $rdata_file --output $output_gff_file --type $seq_type --width $width --minoverlap $minoverlap --dyad_length $dyad_length --hthresh $hthres --wthresh $wthres --pcKeepComp $pcKeepComp --fdrOverAmp $fdrOverAmp  --trim $trim --fragmentLen $fragmentLen 
+	#if $threshold.is == "absolute":
+        	--threshold TRUE --thresholdValue ${threshold.thresholdValue}
+      	#else if $threshold.is == "percentage":
+        	--threshold FALSE --thresholdPercentage ${threshold.thresholdPercentage}
+	#end if
+	#if $chr
+        	--chr $chr
+	#end if 
+	#if $start
+        	--start $start
+	#end if 
+	#if $end
+        	--end $end
+	#end if 
+	#if $comp
+                --components $comp
+        #end if
+
   </command>
   <inputs>
     <param name="rdata_file" type="data" format="rdata" label="Input RData"/>
     <param name="seq_type" type="select" label="Type of sequence reads">
-      <option value="single">Single</option>
       <option value="paired">Paired</option>
+      <option value="single">Single</option>
     </param>
     <param name="width" size="4" type="integer" value="147" label="Width" help="Size of each nucleosome, in bp."/>  
     <param name="minoverlap"   type="integer" value="80" label="Minimum Overlap (bp)" help="Minimum overlap between two nucleosomes for merging them."/>
     <param name="dyad_length"  type="integer" value="50" label="Dyad length (bp)" help="Lenght of the reads that should be used for nucleosome calling to define the dyad of the nuclesomes keeping the number of bases around the center of the read."/>
     <param name="fragmentLen"  type="integer" value="170" label="Fragment Length (bp)"/>
-    <param name="chr"          type="text"    value="" label="Chromosome"  optional="True"/>
-    <param name="start"        type="integer" value="" label="Start" optional="True"/>
-    <param name="end"          type="integer" value="" label="End" optional="True"/>
-    <param name="threshold"    type="boolean" checked="true" label="Use Threshold"/>
-    <param name="thresholdValue" type="integer" value="10" label="Threshold Value"/>
-    <param name="thresholdPercentage" type="float" value="35" label="Background level (%)" help="Minimum number of reads (Coverage) to call a nucleosome. Can be given as a percentage (i.e., '25%' means that the peaks with coverage in the 1st quartile of data won't be considered); or as an absolute coverage value (i.e., '20' means that the peaks with less than 20 reads per million of mapped reads won't be considered). Default = 35%" />
+    <param name="chr"          type="text"    value="" label="Chromosome"  optional="true" help="Chromosome to consider for the analysis in the given input file."/>
+    <param name="start"        type="integer" value="" label="Start" optional="True" help="Start genomic position to consider for the analysis in the given input file."/>
+    <param name="end"          type="integer" value="" label="End" optional="True" help="End genomic position to consider for the analysis in the given input file."/>
+    <param name="comp"          type="integer" value="1" label="Components" optional="True" help="Number of negative binomials that will be used to filter duplicated reads."/>
+
+    <conditional name="threshold">
+            <param name="is" type="select" label="Background threshold" help="Minimum number of reads (Coverage) to call a nucleosome. Can be given as a percentage, or an absolute number of reads.">
+                <option value="absolute">use a number of reads</option>
+                <option value="percentage">use a percentage</option>
+            </param>
+            <when value="absolute">
+    		<param name="thresholdValue" type="integer" value="10" label="Bakground level (reads)" help="Absolute value to filter out nucleosome calls. It is the minimum number of reads (coverage) in a nucleosome call expressed as reads per million of mapped reads."/>
+            </when>
+            <when value="percentage">
+		    <param name="thresholdPercentage" type="float" value="35" label="Background level (%)" help="Percentile of coverage in the experiment used as threshold to filter out nucleosome calls (i.e., 25% would mean that only peaks with coverage in the 1st quantile would be considered)"/>
+            </when>
+    </conditional>
     <param name="hthres"       type="float"   value="0.4" label="Height Threshold" help="Height threshold (between 0 and 1) to classify a nucleosome as fuzzy (class=F) or well-positioned ( class=W) according to the number of reads at the dyad. Nucleosomes below this value will be defined as fuzzy."/>
     <param name="wthres"       type="float"   value="0.6" label="Width Threshold" help="Width threshold (between 0 and 1) to classify a nucleosome as fuzzy (class=F) or well-positioned (class=W) according to the dispersion of the reads around the dyad."/>
-    <param name="fdrOverAmp"   type="float"   value="0.05" label="fdrOverAmp"/>
-    <param name="pcKeepComp"   type="float"   value="0.02" label="Coverage Smoothing" help="Parameter used in the smoothing when Fourier transformation is applied. Number of components to select with respect to the total size of the sample. llowed values are numeric (in range 0:1) for manual setting, or auto for automatic detection."/>
-    <param name="trim"         type="integer" value="50" label="Trim" />
+    <param name="fdrOverAmp"   type="float"   value="0.05" label="fdrOverAmp" help="Threshold to filter over-amplified reads , as defined in filterDuplReads function of htSetqTools R package."/>
+    <param name="pcKeepComp"   type="float"   value="0.02" label="Coverage Smoothing" help="Parameter used in the smoothing when Fourier transformation is applied. Number of components to select with respect to the total size of the sample. Allowed values are numeric (in range 0:1) for manual setting, or auto for automatic detection."/>
+    <param name="trim"         type="integer" value="50" label="Trim" help="Number of basepairs to keep from each read (or to extend in case it is larger than the read width)"/>
   </inputs>
   <outputs>
-    <data format="gff" name="output_gff_file" label="nucleR_${os.path.splitext(os.path.basename($rdata_file.name))[0]}.gff" />
-  
+    <data format="gff" name="output_gff_file" label="NR__${os.path.splitext(($rdata_file.name.split('__'))[1])[0]}.gff" />
 </outputs>
+     <help>
+.. class:: warningmark
+
+
+Check the documentation for setting the tool parameters at the source code repository: http://mmb.irbbarcelona.org/gitlab/NuclDynamics/docker 
+
+-----
+
+.. image:: ${static_path}/images/NucleosomeDynamicsLogo.png 
+    :height: 80 
+    :width: 200
+
+**http://mmb.irbbarcelona.org/NucleosomeDynamics**
+   </help>
+   <citations>
+        <citation type="bibtex">
+@misc{github,
+  author = {Buitrago D},
+  year = {2019},
+  title = {Nucleosome Dynamics suite: containerized installation},
+  publisher = {GitLab},
+  journal = {GitLab repository},
+  url = {http://mmb.irbbarcelona.org/gitlab/NuclDynamics/docker},
+}</citation>
+ </citations>
 </tool>

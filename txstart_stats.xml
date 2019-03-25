@@ -6,13 +6,13 @@
   <command>
     ln -f -s $output_gw_png_file $output_gw_png_file\.png;
     ln -f -s $output_gw2_png_file $output_gw2_png_file\.png;
-    docker run -v $__root_dir__/database/files:$__root_dir__/database/files -v $__root_dir__/data:$__root_dir__/data -u `id -u`:`id -g`  mmbirb/nucldyn:galaxy0.3 txstart_stats --input $gff_file
+    docker run -v $__root_dir__/database/files:$__root_dir__/database/files -v /data:/data -u `id -u`:`id -g`  mmbirb/nucldyn txstart_stats --input $gff_file
     #if $assembly.source == "buildin":
                 --genome ${assembly.ref_genome_gff_buildin}
         #else if $assembly.source == "history":
                 --genome ${assembly.ref_genome_gff_history}
         #end if
-    --out_genes $output_genes_csv_file --out_gw $output_gw_png_file\.png --out_gw2 $output_gw2_png_file\.png 2>&amp;1;
+    --out_genes $output_genes_csv_file --out_gw $output_gw_png_file\.png --out_gw2 $output_gw2_png_file\.png;
     rm $output_gw_png_file\.png;
     rm $output_gw2_png_file\.png 
   </command>
@@ -37,8 +37,33 @@
 	</conditional>
 </inputs>
   <outputs>
-    <data format="csv" name="output_genes_csv_file" label="TSS_stats_${os.path.splitext(os.path.basename($gff_file.name))[0]}.genes.csv" />
-    <data format="png" name="output_gw_png_file" label="TSS_stats_${os.path.splitext(os.path.basename($gff_file.name))[0]}.gw.png" />
-    <data format="png" name="output_gw2_png_file" label="TSS_stats_${os.path.splitext(os.path.basename($gff_file.name))[0]}.gw2.png" />
+    <data format="csv" name="output_genes_csv_file" label="TSS__stats__${os.path.splitext(($gff_file.name.split('__'))[1])[0]}.genes.csv" />
+    <data format="png" name="output_gw_png_file" label="TSS__stats__${os.path.splitext(($gff_file.name.split('__'))[1])[0]}.gw.png" />
+    <data format="png" name="output_gw2_png_file" label="TSS__stats__${os.path.splitext(($gff_file.name.split('__'))[1])[0]}.gw2.png" />
   </outputs>
+     <help>
+.. class:: warningmark
+
+
+Check the documentation for setting the tool parameters at the source code repository: http://mmb.irbbarcelona.org/gitlab/NuclDynamics/docker 
+
+-----
+
+.. image:: ${static_path}/images/NucleosomeDynamicsLogo.png 
+    :height: 80 
+    :width: 200
+
+**http://mmb.irbbarcelona.org/NucleosomeDynamics**
+   </help>
+   <citations>
+        <citation type="bibtex">
+@misc{github,
+  author = {Buitrago D},
+  year = {2019},
+  title = {Nucleosome Dynamics suite: containerized installation},
+  publisher = {GitLab},
+  journal = {GitLab repository},
+  url = {http://mmb.irbbarcelona.org/gitlab/NuclDynamics/docker},
+}</citation>
+ </citations>
 </tool>
