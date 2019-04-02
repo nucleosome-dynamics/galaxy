@@ -1,0 +1,78 @@
+<tool id="stiffness_stats" name="Stiffness Statistics" version="0.1">
+ <description>: gather gene and genome-wide statistics on nucleosome position stiffness</description>
+ <requirements>
+ <requirement type="binary">docker</requirement>
+ </requirements>
+ <command>
+<![CDATA[
+    ln -f -s $output_gw2_png_file $output_gw2_png_file\.png;
+    docker run -v $__root_dir__/database/files:$__root_dir__/database/files -v /data:/data -v /tmp:/tmp -u `id -u`:`id -g` mmbirb/nucldyn stiffness_stats --input $gff_file
+    	#if $assembly.source == "buildin":
+                --genome ${assembly.ref_genome_gff_buildin}
+    	#else if $assembly.source == "history":
+                --genome ${assembly.ref_genome_gff_history}
+        #end if   
+    --out_genes $output_genes_csv_file --out_gw $output_gw_csv_file --out_gw2 $output_gw2_png_file\.png;
+    rm $output_gw2_png_file\.png
+    ]]>
+ </command>
+  <inputs>
+    <param name="gff_file" type="data" format="gff" label="Input Nucleosome Calls"/>
+      <conditional name="assembly">
+            <param name="source" type="select" label="Select a built-in reference genome or use one from your history" help="Taking from each assembly their chromosome sizes and their annotated genes.">
+                <option value="buildin" selected="True">Use a built-in genome</option>
+                <option value="history">Use a genome from the history</option>
+            </param>
+            <when value="buildin">
+                <param name="ref_genome_gff_buildin" type="select" label="Select reference genome" help="If your genome of interest is not listed, contact the Galaxy team">
+                    <options from_file="nucldyn_publicdata.loc">
+                        <column name="name" index="2"/>
+                        <column name="value" index="4"/>
+                    </options>
+                </param>
+            </when>
+            <when value="history">
+                <param name="ref_genome_gff_history" type="data" format="gff" label="Select gene annotations for your reference genome" help="Check below the documentation for lerning about the file format."/>
+            </when>
+       </conditional>
+</inputs>
+  <outputs>
+    <data format="csv" name="output_genes_csv_file" label="STF__stats__${os.path.splitext(($gff_file.name.split('__'))[1])[0]}.genes.csv" />
+    <data format="csv" name="output_gw_csv_file" label="STF__stats__${os.path.splitext(($gff_file.name.split('__'))[1])[0]}.gw.csv" />
+    <data format="png" name="output_gw2_png_file" label="STF__stats__${os.path.splitext(($gff_file.name.split('__'))[1])[0]}.gw2.png" />
+  </outputs>
+  <tests>
+	  <test>
+		  <param name="gff_file" value="/home/user/nucleosome_dynamics_galaxy/tools/test-data/outputs/STF__cellcycleG2_chrII.gff" />
+		  <param name="ref_genome_gff_buildin" value="/data/nucldyn_publicdata/refGenomes/R64-1-1/genes.gff" />
+		  <output name="output_genes_csv_file" file="/home/user/nucleosome_dynamics_galaxy/tools/test-data/outputs/STF__stats__cellcycleG2_chrII.genes.csv" />
+		  <output name="output_gw_csv_file" file="/home/user/nucleosome_dynamics_galaxy/tools/test-data/outputs/STF__stats__cellcycleG2_chrII.gw.csv" />
+		  <output name="output_gw2_png_file" file="/home/user/nucleosome_dynamics_galaxy/tools/test-data/outputs/STF__stats__cellcycleG2_chrII.gw2.png" />
+	  </test>
+  </tests>
+		  <help>
+.. class:: warningmark
+
+
+Check the documentation for setting the tool parameters at the source code repository: http://mmb.irbbarcelona.org/gitlab/NuclDynamics/docker 
+
+-----
+
+.. image:: ${static_path}/images/NucleosomeDynamicsLogo.png 
+    :height: 80 
+    :width: 200
+
+**http://mmb.irbbarcelona.org/NucleosomeDynamics**
+   </help>
+   <citations>
+        <citation type="bibtex">
+@misc{github,
+  author = {Buitrago D},
+  year = {2019},
+  title = {Nucleosome Dynamics suite: containerized installation},
+  publisher = {GitLab},
+  journal = {GitLab repository},
+  url = {http://mmb.irbbarcelona.org/gitlab/NuclDynamics/docker},
+}</citation>
+ </citations>
+</tool>

@@ -1,0 +1,51 @@
+<tool id="readBAM" name="readBAM" version="0.1">
+  <description>: convert aligned BAM files to RData format for NucleosomeDynamics</description>
+  <requirements>
+  <requirement type="binary">docker</requirement>
+  </requirements>
+  <command>
+	  docker run -v $__root_dir__/database/files:$__root_dir__/database/files -v /tmp:/tmp -u `id -u`:`id -g` mmbirb/nucldyn readBAM --input $bam_file --output $rdata_file --type $seq_type
+  </command>
+  <inputs>
+    <param name="bam_file" type="data" format="bam" label="BAM File to convert"/>
+    <param name="seq_type" type="select" label="Type of sequence reads">
+      <option value="paired">Paired</option>
+      <option value="single">Single</option>
+    </param>
+  </inputs>
+  <outputs>
+    <data format="rdata" name="rdata_file" label="readBAM__${os.path.splitext(os.path.basename($bam_file.name))[0]}.rdata" />
+  </outputs>
+  <tests>
+      <test>   
+	  <param  name="bam_file" value="/home/user/nucleosome_dynamics_galaxy/tools/test-data/inputs/cellcycleG2_chrII.bam"/>
+          <param  name="seq_type" value="paired" />
+	  <output name="rdata_file" file="/home/user/nucleosome_dynamics_galaxy/tools/test-data/outputs/cellcycleG2_chrII.RData"/>
+       </test>
+   </tests>
+    <help>
+.. class:: warningmark
+
+
+Check the documentation for setting the tool parameters at the source code repository: http://mmb.irbbarcelona.org/gitlab/NuclDynamics/docker 
+
+-----
+
+.. image:: ${static_path}/images/NucleosomeDynamicsLogo.png 
+    :height: 80 
+    :width: 200
+
+**http://mmb.irbbarcelona.org/NucleosomeDynamics**
+   </help>
+   <citations>
+        <citation type="bibtex">
+@misc{github,
+  author = {Buitrago D},
+  year = {2019},
+  title = {Nucleosome Dynamics suite: containerized installation},
+  publisher = {GitLab},
+  journal = {GitLab repository},
+  url = {http://mmb.irbbarcelona.org/gitlab/NuclDynamics/docker},
+}</citation>
+ </citations>
+</tool>

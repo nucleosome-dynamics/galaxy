@@ -1,0 +1,72 @@
+<tool id="NFR_stats" name="Nucleosome Free Regions Statistics" version="0.1">
+	<description>: gather gene and genome-wide statistics on Nucleosome Free Regions</description>
+	<requirements>
+        <requirement type="binary">docker</requirement>
+    </requirements>
+    <command>
+	<![CDATA[    
+	docker run -v $__root_dir__/database/files:$__root_dir__/database/files -v /data:/data -v /tmp:/tmp  -u `id -u`:`id -g`  mmbirb/nucldyn NFR_stats --input $gff_file 
+	#if $assembly.source == "buildin":
+        	--genome ${assembly.ref_genome_gff_buildin}
+      	#else if $assembly.source == "history":
+        	--genome ${assembly.ref_genome_gff_history}
+	#end if
+	--out_gw $output_gw_csv_file
+	]]>
+  </command>
+  <inputs>
+    <param name="gff_file" type="data" format="gff" label="Input Nucleosome Calls"/>
+     <conditional name="assembly">
+            <param name="source" type="select" label="Select a built-in reference genome or use one from your history" help="Taking from each assembly their chromosome sizes and their annotated genes.">
+                <option value="buildin" selected="True">Use a built-in genome</option>
+                <option value="history">Use a genome from the history</option>
+            </param>
+            <when value="buildin">
+                <param name="ref_genome_gff_buildin" type="select" label="Select reference genome" help="If your genome of interest is not listed, contact the Galaxy team">
+                    <options from_file="nucldyn_publicdata.loc">
+                        <column name="name" index="2"/>
+                        <column name="value" index="4"/>
+                    </options>
+                </param>
+            </when>
+            <when value="history">
+                <param name="ref_genome_gff_history" type="data" format="gff" label="Select gene annotations for your reference genome" help="Check below the documentation for lerning about the file format."/>
+            </when>
+       </conditional>
+</inputs>
+  <outputs>
+    <data format="csv" name="output_gw_csv_file" label="NFR__stats__${os.path.splitext(($gff_file.name.split('__'))[1])[0]}.gw.csv" />
+  </outputs>
+  <tests>
+	  <test>
+		<param name="gff_file" value="/home/user/nucleosome_dynamics_galaxy/tools/test-data/outputs/NFR__cellcycleG2_chrII.gff" />
+		<param name="ref_genome_gff_buildin" value="/data/nucldyn_publicdata/refGenomes/R64-1-1/genes.gff" />
+		<output name="output_gw_csv_file" file="/home/user/nucleosome_dynamics_galaxy/tools/test-data/outputs/NFR__stats__cellcycleG2_chrII.gw.csv" />	  
+	  </test>
+  </tests>	
+		<help>
+.. class:: warningmark
+
+
+Check the documentation for setting the tool parameters at the source code repository: http://mmb.irbbarcelona.org/gitlab/NuclDynamics/docker 
+
+-----
+
+.. image:: ${static_path}/images/NucleosomeDynamicsLogo.png 
+    :height: 80 
+    :width: 200
+
+**http://mmb.irbbarcelona.org/NucleosomeDynamics**
+   </help>
+   <citations>
+        <citation type="bibtex">
+@misc{github,
+  author = {Buitrago D},
+  year = {2019},
+  title = {Nucleosome Dynamics suite: containerized installation},
+  publisher = {GitLab},
+  journal = {GitLab repository},
+  url = {http://mmb.irbbarcelona.org/gitlab/NuclDynamics/docker},
+}</citation>
+ </citations>
+</tool>
