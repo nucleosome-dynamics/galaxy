@@ -62,7 +62,7 @@
 </outputs>
   <tests>
       <test>
-          <param name="rdata_file" value="/home/user/nucleosome_dynamics_galaxy/tools/test-data/outputs/cellcycleG2_chrII.RData" />
+          <param name="rdata_file" value="/home/user/nucleosome_dynamics_galaxy/tools/test-data/outputs/readBAM__cellcycleG2_chrII.RData" />
 	  <param name="seq_type" value="paired" />
           <param name="width" value="147" />
 	  <param name="minoverlap" value="80" />

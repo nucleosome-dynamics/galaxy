@@ -20,7 +20,7 @@
       <test>   
 	  <param  name="bam_file" value="/home/user/nucleosome_dynamics_galaxy/tools/test-data/inputs/cellcycleG2_chrII.bam"/>
           <param  name="seq_type" value="paired" />
-	  <output name="rdata_file" file="/home/user/nucleosome_dynamics_galaxy/tools/test-data/outputs/cellcycleG2_chrII.RData"/>
+	  <output name="rdata_file" file="/home/user/nucleosome_dynamics_galaxy/tools/test-data/outputs/readBAM__cellcycleG2_chrII.RData"/>
        </test>
    </tests>
     <help>

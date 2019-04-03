@@ -56,7 +56,7 @@
   <tests>
 	  <test>
 		  <param name="gff_file" value="/home/user/nucleosome_dynamics_galaxy/tools/test-data/outputs/NR__cellcycleG2_chrII.gff" />
-		  <param name="rdata_file" value="/home/user/nucleosome_dynamics_galaxy/tools/test-data/outputs/cellcycleG2_chrII.RData" />
+		  <param name="rdata_file" value="/home/user/nucleosome_dynamics_galaxy/tools/test-data/outputs/readBAM__cellcycleG2_chrII.RData" />
 		  <param name="seq_type" value="paired" />
 		  <param name="ref_chrom_sizes_buildin" value="/data/nucldyn_publicdata/refGenomes/R64-1-1/R64-1-1.fa.chrom.sizes" />
 		  <param name="ref_genome_gff_buildin" value="/data/nucldyn_publicdata/refGenomes/R64-1-1/genes.gff" />

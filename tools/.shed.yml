@@ -1,0 +1,9 @@
+description: Suite to run nucleosome-related analyses based on MNase-seq data
+long_description: |
+  This tool analyse MNase-seq BAM reads for extracting nucleosome positioning, nucleosome architecture comparision, nucleosome free regions, nucleosome stiffness, and many other analyses. 
+homepage_url: http://mmb.irbbarcelona.org/NucleosomeDynamics
+name: nucleosome_dynamics
+owner: spanish_national_institue_of_bioinformatics
+remote_repository_url: https://github.com/nucleosome-dynamics/nucleosome_dynamics_galaxy/tools/.shed.yml
+categories:
+- Sequence Analysis
