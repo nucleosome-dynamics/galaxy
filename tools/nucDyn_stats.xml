@@ -42,10 +42,10 @@
   </outputs>
 <tests>
 	<test>
-		<param name="gff_file" value="/home/user/nucleosome_dynamics_galaxy/tools/test-data/outputs/ND__cellcycleG2_chrII_cellcycleM_chrII.gff" />
+		<param name="gff_file" value="ND__cellcycleG2_chrII_cellcycleM_chrII.gff" />
 		<param name="ref_genome_gff_buildin" value="/data/nucldyn_publicdata/refGenomes/R64-1-1/genes.gff" />
-		<output name="output_genes_csv_file" file="/home/user/nucleosome_dynamics_galaxy/tools/test-data/outputs/ND__stats__cellcycleG2_chrII_cellcycleM_chrII.genes.csv" />
-		<output name="output_gw_png_file" file="/home/user/nucleosome_dynamics_galaxy/tools/test-data/outputs/ND__stats__cellcycleG2_chrII_cellcycleM_chrII.gw.png" />
+		<output name="output_genes_csv_file" file="ND__stats__cellcycleG2_chrII_cellcycleM_chrII.genes.csv" />
+		<output name="output_gw_png_file" file="ND__stats__cellcycleG2_chrII_cellcycleM_chrII.gw.png" />
 	</test>
 </tests>
      <help>

@@ -18,10 +18,10 @@
   </outputs>
   <tests>
 	  <test>
-		  <param name="gff_file" value="/home/user/nucleosome_dynamics_galaxy/tools/test-data/outputs/NR__cellcycleG2_chrII.gff"/>
+		  <param name="gff_file" value="NR__cellcycleM_chrII.gff"/>
 		  <param name="minwidth" value="110" />
 		  <param name="threshold" value="400" />
-		  <output name="output_gff_file" file="/home/user/nucleosome_dynamics_galaxy/tools/test-data/outputs/NFR__cellcycleG2_chrII.gff" />
+		  <output name="output_gff_file" file="NFR__cellcycleM_chrII.gff" />
 	  </test>
   </tests>
      <help>

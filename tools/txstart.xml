@@ -41,11 +41,11 @@
   </outputs>
 <tests>
 	<test>
-		<param name="gff_file" value="/home/user/nucleosome_dynamics_galaxy/tools/test-data/outputs/NR__cellcycleG2_chrII.gff" />
+		<param name="gff_file" value="NR__cellcycleM_chrII.gff" />
 		<param name="ref_genome_gff_buildin" value="/data/nucldyn_publicdata/refGenomes/R64-1-1/genes.gff" />
 		<param name="window" value="300" />
 		<param name="open_thres" value="215" />
-		<output name="output_gff_file" file="/home/user/nucleosome_dynamics_galaxy/tools/test-data/outputs/TSS__cellcycleG2_chrII.gff" />
+		<output name="output_gff_file" file="TSS__cellcycleM_chrII.gff" />
 	</test>
 </tests>
 <help>

@@ -45,11 +45,11 @@
   </outputs>
   <tests>
 	  <test>
-		  <param name="gff_file" value="/home/user/nucleosome_dynamics_galaxy/tools/test-data/outputs/TSS__cellcycleG2_chrII.gff" />
+		  <param name="gff_file" value="TSS__cellcycleM_chrII.gff" />
 		  <param name="ref_genome_gff_buildin" value="/data/nucldyn_publicdata/refGenomes/R64-1-1/genes.gff" />
-		  <output name="output_genes_csv_file" file="/home/user/nucleosome_dynamics_galaxy/tools/test-data/outputs/TSS__stats__cellcycleG2_chrII.genes.csv" />
-		  <output name="output_gw_png_file" file="/home/user/nucleosome_dynamics_galaxy/tools/test-data/outputs/TSS__stats__cellcycleG2_chrII.gw.png" />
-		  <output name="output_gw2_png_file" file="/home/user/nucleosome_dynamics_galaxy/tools/test-data/outputs/TSS__stats__cellcycleG2_chrII.gw2.png" />
+		  <output name="output_genes_csv_file" file="TSS__stats__cellcycleM_chrII.genes.csv" />
+		  <output name="output_gw_png_file" file="TSS__stats__cellcycleM_chrII.gw.png" />
+		  <output name="output_gw2_png_file" file="TSS__stats__cellcycleM_chrII.gw2.png" />
 	  </test>
   </tests>
      <help>

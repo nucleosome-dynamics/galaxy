@@ -74,10 +74,10 @@
   </outputs>
  <tests>
 	 <test>
-		<param name="rdata_file" value="/home/user/nucleosome_dynamics_galaxy/tools/test-data/outputs/readBAM__cellcycleG2_chrII.RData" />
-		<param name="rdata_file2" value="/home/user/nucleosome_dynamics_galaxy/tools/test-data/outputs/readBAM__cellcycleM_chrII.RData" />
-		<param name="gff_file" value="/home/user/nucleosome_dynamics_galaxy/tools/test-data/outputs/NR__cellcycleG2_chrII.gff"  />
-		<param name="gff_file2" value="/home/user/nucleosome_dynamics_galaxy/tools/test-data/outputs/NR__cellcycleM_chrII.gff" />
+		<param name="rdata_file" value="readBAM__cellcycleG2_chrII.RData" />
+		<param name="rdata_file2" value="readBAM__cellcycleM_chrII.RData" />
+		<param name="gff_file" value="NR__cellcycleG2_chrII.gff"  />
+		<param name="gff_file2" value="NR__cellcycleM_chrII.gff" />
 		<param name="ref_chrom_sizes_buildin" value="/data/nucldyn_publicdata/refGenomes/R64-1-1/R64-1-1.fa.chrom.sizes" />
 		<param name="range" value="All" />
 		<param name="maxdiff" value="70" />
@@ -86,8 +86,8 @@
 		<param name="threshold" value="0.1" />
 		<param name="minread" value="3" />
 		<param name="indthreshold" value="0.05" />
-		<output name="output_gff_file" file="/home/user/nucleosome_dynamics_galaxy/tools/test-data/outputs/ND__cellcycleG2_chrII_cellcycleM_chrII.gff" />
-		<output name="output_bw_file" file="/home/user/nucleosome_dynamics_galaxy/tools/test-data/outputs/ND__cellcycleG2_chrII_cellcycleM_chrII.bw" />
+		<output name="output_gff_file" file="ND__cellcycleG2_chrII_cellcycleM_chrII.gff" />
+		<output name="output_bw_file" file="ND__cellcycleG2_chrII_cellcycleM_chrII.bw" />
 	</test>
  </tests>
      <help>
