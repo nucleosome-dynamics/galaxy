@@ -150,5 +150,5 @@ You can import Nucleosome Dynamics workflow from the Galaxy web interface.  Got 
 Make sure that all the tools are installed before Importing. You can run the full workflow with this import or create one using create workflow option.
 
 
-![Workflow](./workflow/Galaxy-Workflow-Nucleosome_Dynamics_Workflow.png)
+![Workflow](workflow/Galaxy-Workflow-Nucleosome_Dynamics_Workflow.png)
 
