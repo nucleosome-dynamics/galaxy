@@ -72,9 +72,9 @@ Check the documentation for setting the tool parameters at the source code repos
   author = {Buitrago D},
   year = {2019},
   title = {Nucleosome Dynamics suite: containerized installation},
-  publisher = {GitLab},
-  journal = {GitLab repository},
-  url = {http://mmb.irbbarcelona.org/gitlab/NuclDynamics/docker},
+  publisher = {GitHub},
+  journal = {GitHub repository},
+  url = {https://github.com/nucleosome-dynamics/nucleosome_dynamics},
 }</citation>
  </citations>
 </tool>
