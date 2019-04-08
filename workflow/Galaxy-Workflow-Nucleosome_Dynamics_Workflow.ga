@@ -1,0 +1,1109 @@
+{
+    "a_galaxy_workflow": "true", 
+    "annotation": "", 
+    "format-version": "0.1", 
+    "name": "Nucleosome Dynamics Workflow", 
+    "steps": {
+        "0": {
+            "annotation": "", 
+            "content_id": "readBAM", 
+            "errors": null, 
+            "id": 0, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool readBAM", 
+                    "name": "bam_file"
+                }
+            ], 
+            "label": "readBAM 1", 
+            "name": "readBAM", 
+            "outputs": [
+                {
+                    "name": "rdata_file", 
+                    "type": "rdata"
+                }
+            ], 
+            "position": {
+                "left": 134, 
+                "top": 320.48333740234375
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionrdata_file": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "rdata_file"
+                }
+            }, 
+            "tool_id": "readBAM", 
+            "tool_state": "{\"seq_type\": \"\\\"paired\\\"\", \"bam_file\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"__page__\": null}", 
+            "tool_version": "0.1", 
+            "type": "tool", 
+            "uuid": "7c68fe62-c5eb-4cf5-a8ef-9d2f6d3223a2", 
+            "workflow_outputs": []
+        }, 
+        "1": {
+            "annotation": "", 
+            "content_id": "readBAM", 
+            "errors": null, 
+            "id": 1, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool readBAM", 
+                    "name": "bam_file"
+                }
+            ], 
+            "label": "readBAM 2", 
+            "name": "readBAM", 
+            "outputs": [
+                {
+                    "name": "rdata_file", 
+                    "type": "rdata"
+                }
+            ], 
+            "position": {
+                "left": 129.46665954589844, 
+                "top": 671.7000122070312
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionrdata_file": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "rdata_file"
+                }
+            }, 
+            "tool_id": "readBAM", 
+            "tool_state": "{\"seq_type\": \"\\\"paired\\\"\", \"bam_file\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"__page__\": null}", 
+            "tool_version": "0.1", 
+            "type": "tool", 
+            "uuid": "32a8d563-9d55-4bb8-8426-c80ea816fd6c", 
+            "workflow_outputs": []
+        }, 
+        "2": {
+            "annotation": "", 
+            "content_id": "nucleR", 
+            "errors": null, 
+            "id": 2, 
+            "input_connections": {
+                "rdata_file": {
+                    "id": 0, 
+                    "output_name": "rdata_file"
+                }
+            }, 
+            "inputs": [], 
+            "label": "NucleR 1", 
+            "name": "NucleR", 
+            "outputs": [
+                {
+                    "name": "output_gff_file", 
+                    "type": "gff"
+                }
+            ], 
+            "position": {
+                "left": 326.51666259765625, 
+                "top": 282.75
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "nucleR", 
+            "tool_state": "{\"hthres\": \"\\\"0.4\\\"\", \"trim\": \"\\\"50\\\"\", \"end\": \"\\\"\\\"\", \"fragmentLen\": \"\\\"170\\\"\", \"wthres\": \"\\\"0.6\\\"\", \"__page__\": null, \"comp\": \"\\\"1\\\"\", \"__rerun_remap_job_id__\": null, \"rdata_file\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"fdrOverAmp\": \"\\\"0.05\\\"\", \"minoverlap\": \"\\\"80\\\"\", \"width\": \"\\\"147\\\"\", \"chr\": \"\\\"\\\"\", \"threshold\": \"{\\\"__current_case__\\\": 0, \\\"is\\\": \\\"absolute\\\", \\\"thresholdValue\\\": \\\"10\\\"}\", \"pcKeepComp\": \"\\\"0.02\\\"\", \"seq_type\": \"\\\"paired\\\"\", \"start\": \"\\\"\\\"\", \"dyad_length\": \"\\\"50\\\"\"}", 
+            "tool_version": "0.1", 
+            "type": "tool", 
+            "uuid": "66d0ecc7-3cfe-447c-8e19-1e67329fc09a", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "output_gff_file", 
+                    "uuid": "ba7c1be4-89bc-49c4-8fed-09a47e3537e1"
+                }
+            ]
+        }, 
+        "3": {
+            "annotation": "", 
+            "content_id": "nucleR", 
+            "errors": null, 
+            "id": 3, 
+            "input_connections": {
+                "rdata_file": {
+                    "id": 1, 
+                    "output_name": "rdata_file"
+                }
+            }, 
+            "inputs": [], 
+            "label": "NucleR 2", 
+            "name": "NucleR", 
+            "outputs": [
+                {
+                    "name": "output_gff_file", 
+                    "type": "gff"
+                }
+            ], 
+            "position": {
+                "left": 315.7166748046875, 
+                "top": 643.433349609375
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "nucleR", 
+            "tool_state": "{\"hthres\": \"\\\"0.4\\\"\", \"trim\": \"\\\"50\\\"\", \"end\": \"\\\"\\\"\", \"fragmentLen\": \"\\\"170\\\"\", \"wthres\": \"\\\"0.6\\\"\", \"__page__\": null, \"comp\": \"\\\"1\\\"\", \"__rerun_remap_job_id__\": null, \"rdata_file\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"fdrOverAmp\": \"\\\"0.05\\\"\", \"minoverlap\": \"\\\"80\\\"\", \"width\": \"\\\"147\\\"\", \"chr\": \"\\\"\\\"\", \"dyad_length\": \"\\\"50\\\"\", \"threshold\": \"{\\\"__current_case__\\\": 0, \\\"is\\\": \\\"absolute\\\", \\\"thresholdValue\\\": \\\"10\\\"}\", \"thresholdPercentage\": \"\\\"35.0\\\"\", \"pcKeepComp\": \"\\\"0.02\\\"\", \"seq_type\": \"\\\"single\\\"\", \"start\": \"\\\"\\\"\", \"thresholdValue\": \"\\\"10\\\"\"}", 
+            "tool_version": "0.1", 
+            "type": "tool", 
+            "uuid": "8afa1c49-dc51-45b2-a28f-9cd522bedbf5", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "output_gff_file", 
+                    "uuid": "9321fb39-a7d2-4ca8-b0d5-c05ab4724ae6"
+                }
+            ]
+        }, 
+        "4": {
+            "annotation": "", 
+            "content_id": "nucleR_stats", 
+            "errors": null, 
+            "id": 4, 
+            "input_connections": {
+                "gff_file": {
+                    "id": 2, 
+                    "output_name": "output_gff_file"
+                }
+            }, 
+            "inputs": [], 
+            "label": "NucleR Statistics 1", 
+            "name": "NucleR Statistics", 
+            "outputs": [
+                {
+                    "name": "output_genes_csv_file", 
+                    "type": "csv"
+                }, 
+                {
+                    "name": "output_gw_csv_file", 
+                    "type": "csv"
+                }
+            ], 
+            "position": {
+                "left": 318.51666259765625, 
+                "top": 363.3666687011719
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "nucleR_stats", 
+            "tool_state": "{\"gff_file\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"assembly\": \"{\\\"__current_case__\\\": 0, \\\"ref_genome_gff_buildin\\\": \\\"/data/nucldyn_publicdata/refGenomes/R64-1-1/genes.gff\\\", \\\"source\\\": \\\"buildin\\\"}\"}", 
+            "tool_version": "0.1", 
+            "type": "tool", 
+            "uuid": "f5e1f3a0-945c-4b23-bf3a-9f351e9f87fe", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "output_gw_csv_file", 
+                    "uuid": "fd4f4497-e28c-416c-b8cb-442c0100659b"
+                }, 
+                {
+                    "label": null, 
+                    "output_name": "output_genes_csv_file", 
+                    "uuid": "33ad600b-92cc-473c-804c-0d5059eeac21"
+                }
+            ]
+        }, 
+        "5": {
+            "annotation": "", 
+            "content_id": "periodicity", 
+            "errors": null, 
+            "id": 5, 
+            "input_connections": {
+                "gff_file": {
+                    "id": 2, 
+                    "output_name": "output_gff_file"
+                }, 
+                "rdata_file": {
+                    "id": 0, 
+                    "output_name": "rdata_file"
+                }
+            }, 
+            "inputs": [], 
+            "label": "Nucleosome Gene Phasing 1", 
+            "name": "Nucleosome Gene Phasing", 
+            "outputs": [
+                {
+                    "name": "output_gff_file", 
+                    "type": "gff"
+                }, 
+                {
+                    "name": "bwOutput_file", 
+                    "type": "bigwig"
+                }
+            ], 
+            "position": {
+                "left": 547.61669921875, 
+                "top": 134
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "periodicity", 
+            "tool_state": "{\"seq_type\": \"\\\"paired\\\"\", \"__page__\": null, \"assembly\": \"{\\\"__current_case__\\\": 0, \\\"ref_chrom_sizes_buildin\\\": \\\"/data/nucldyn_publicdata/refGenomes/R64-1-1/R64-1-1.fa.chrom.sizes\\\", \\\"ref_genome_gff_buildin\\\": \\\"/data/nucldyn_publicdata/refGenomes/R64-1-1/genes.gff\\\", \\\"source\\\": \\\"buildin\\\"}\", \"periodicity\": \"\\\"165\\\"\", \"gff_file\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"__rerun_remap_job_id__\": null, \"rdata_file\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\"}", 
+            "tool_version": "0.1", 
+            "type": "tool", 
+            "uuid": "aa18c74f-241a-4723-922e-daa998e38b0d", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "output_gff_file", 
+                    "uuid": "2c2facc2-6da8-48f5-b56a-47b2a1499a3a"
+                }, 
+                {
+                    "label": null, 
+                    "output_name": "bwOutput_file", 
+                    "uuid": "bfcacc26-a74c-4898-ac06-ab10eb1dd441"
+                }
+            ]
+        }, 
+        "6": {
+            "annotation": "", 
+            "content_id": "NFR", 
+            "errors": null, 
+            "id": 6, 
+            "input_connections": {
+                "gff_file": {
+                    "id": 2, 
+                    "output_name": "output_gff_file"
+                }
+            }, 
+            "inputs": [], 
+            "label": "Nucleosome Free Regions 1", 
+            "name": "Nucleosome Free Regions", 
+            "outputs": [
+                {
+                    "name": "output_gff_file", 
+                    "type": "gff"
+                }
+            ], 
+            "position": {
+                "left": 546.9666748046875, 
+                "top": 291.1499938964844
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "NFR", 
+            "tool_state": "{\"gff_file\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"minwidth\": \"\\\"110\\\"\", \"__rerun_remap_job_id__\": null, \"threshold\": \"\\\"140\\\"\", \"__page__\": null}", 
+            "tool_version": "0.1", 
+            "type": "tool", 
+            "uuid": "79f3f594-092e-4c58-a1d7-aee119a641cc", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "output_gff_file", 
+                    "uuid": "11050d74-b1ca-4808-87d0-1dd970e67464"
+                }
+            ]
+        }, 
+        "7": {
+            "annotation": "", 
+            "content_id": "txstart", 
+            "errors": null, 
+            "id": 7, 
+            "input_connections": {
+                "gff_file": {
+                    "id": 2, 
+                    "output_name": "output_gff_file"
+                }
+            }, 
+            "inputs": [], 
+            "label": "TSS classification 1", 
+            "name": "TSS classification", 
+            "outputs": [
+                {
+                    "name": "output_gff_file", 
+                    "type": "gff"
+                }
+            ], 
+            "position": {
+                "left": 549.5333251953125, 
+                "top": 387.7166748046875
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "txstart", 
+            "tool_state": "{\"__page__\": null, \"assembly\": \"{\\\"__current_case__\\\": 0, \\\"ref_genome_gff_buildin\\\": \\\"/data/nucldyn_publicdata/refGenomes/R64-1-1/genes.gff\\\", \\\"source\\\": \\\"buildin\\\"}\", \"gff_file\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"__rerun_remap_job_id__\": null, \"window\": \"\\\"300\\\"\", \"open_thres\": \"\\\"215\\\"\"}", 
+            "tool_version": "0.1", 
+            "type": "tool", 
+            "uuid": "3d45f41c-198a-48d0-a52f-9f38cc64e96a", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "output_gff_file", 
+                    "uuid": "987b2a86-f314-471c-96e3-6063d23e3579"
+                }
+            ]
+        }, 
+        "8": {
+            "annotation": "", 
+            "content_id": "stiffness", 
+            "errors": null, 
+            "id": 8, 
+            "input_connections": {
+                "gff_file": {
+                    "id": 2, 
+                    "output_name": "output_gff_file"
+                }, 
+                "rdata_file": {
+                    "id": 0, 
+                    "output_name": "rdata_file"
+                }
+            }, 
+            "inputs": [], 
+            "label": "Stiffness 1", 
+            "name": "Stiffness", 
+            "outputs": [
+                {
+                    "name": "output_gff_file", 
+                    "type": "gff"
+                }
+            ], 
+            "position": {
+                "left": 552.2999877929688, 
+                "top": 493.36669921875
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "stiffness", 
+            "tool_state": "{\"gff_file\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"__page__\": null, \"range\": \"\\\"All\\\"\", \"__rerun_remap_job_id__\": null, \"rdata_file\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\"}", 
+            "tool_version": "0.1", 
+            "type": "tool", 
+            "uuid": "535b6592-7b0d-4d0c-9489-b600ef5763a9", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "output_gff_file", 
+                    "uuid": "a4384440-b99b-41a0-b507-ebd740e3c43c"
+                }
+            ]
+        }, 
+        "9": {
+            "annotation": "", 
+            "content_id": "nucleR_stats", 
+            "errors": null, 
+            "id": 9, 
+            "input_connections": {
+                "gff_file": {
+                    "id": 3, 
+                    "output_name": "output_gff_file"
+                }
+            }, 
+            "inputs": [], 
+            "label": "NucleR Statistics 2", 
+            "name": "NucleR Statistics", 
+            "outputs": [
+                {
+                    "name": "output_genes_csv_file", 
+                    "type": "csv"
+                }, 
+                {
+                    "name": "output_gw_csv_file", 
+                    "type": "csv"
+                }
+            ], 
+            "position": {
+                "left": 313.0333251953125, 
+                "top": 738.25
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "nucleR_stats", 
+            "tool_state": "{\"gff_file\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"assembly\": \"{\\\"__current_case__\\\": 0, \\\"ref_genome_gff_buildin\\\": \\\"/data/nucldyn_publicdata/refGenomes/R64-1-1/genes.gff\\\", \\\"source\\\": \\\"buildin\\\"}\"}", 
+            "tool_version": "0.1", 
+            "type": "tool", 
+            "uuid": "af90899a-0e92-4256-aed8-79a59ed100bf", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "output_gw_csv_file", 
+                    "uuid": "f54f608e-fd9a-4e33-ba06-e394e10f0a18"
+                }, 
+                {
+                    "label": null, 
+                    "output_name": "output_genes_csv_file", 
+                    "uuid": "cad8a0bf-7e7d-4d5d-9e0f-7699a502b24f"
+                }
+            ]
+        }, 
+        "10": {
+            "annotation": "", 
+            "content_id": "periodicity", 
+            "errors": null, 
+            "id": 10, 
+            "input_connections": {
+                "gff_file": {
+                    "id": 3, 
+                    "output_name": "output_gff_file"
+                }, 
+                "rdata_file": {
+                    "id": 1, 
+                    "output_name": "rdata_file"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Nucleosome Gene Phasing", 
+                    "name": "gff_file"
+                }, 
+                {
+                    "description": "runtime parameter for tool Nucleosome Gene Phasing", 
+                    "name": "rdata_file"
+                }
+            ], 
+            "label": "Nucleosome Gene Phasing 2", 
+            "name": "Nucleosome Gene Phasing", 
+            "outputs": [
+                {
+                    "name": "output_gff_file", 
+                    "type": "gff"
+                }, 
+                {
+                    "name": "bwOutput_file", 
+                    "type": "bigwig"
+                }
+            ], 
+            "position": {
+                "left": 548.3333129882812, 
+                "top": 629.7999877929688
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "periodicity", 
+            "tool_state": "{\"seq_type\": \"\\\"paired\\\"\", \"__page__\": null, \"assembly\": \"{\\\"__current_case__\\\": 0, \\\"ref_chrom_sizes_buildin\\\": \\\"/data/nucldyn_publicdata/refGenomes/R64-1-1/R64-1-1.fa.chrom.sizes\\\", \\\"ref_genome_gff_buildin\\\": \\\"/data/nucldyn_publicdata/refGenomes/R64-1-1/genes.gff\\\", \\\"source\\\": \\\"buildin\\\"}\", \"periodicity\": \"\\\"165\\\"\", \"gff_file\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"rdata_file\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
+            "tool_version": "0.1", 
+            "type": "tool", 
+            "uuid": "5173fd99-55e4-4f68-b2e5-c5516746d777", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "output_gff_file", 
+                    "uuid": "dfe50a0c-55f7-418a-88fa-9977c1c0e7c0"
+                }, 
+                {
+                    "label": null, 
+                    "output_name": "bwOutput_file", 
+                    "uuid": "cd09919d-f5ea-4af1-beb2-81bd25885688"
+                }
+            ]
+        }, 
+        "11": {
+            "annotation": "", 
+            "content_id": "NFR", 
+            "errors": null, 
+            "id": 11, 
+            "input_connections": {
+                "gff_file": {
+                    "id": 3, 
+                    "output_name": "output_gff_file"
+                }
+            }, 
+            "inputs": [], 
+            "label": "Nucleosome Free Regions 2", 
+            "name": "Nucleosome Free Regions", 
+            "outputs": [
+                {
+                    "name": "output_gff_file", 
+                    "type": "gff"
+                }
+            ], 
+            "position": {
+                "left": 545.5999755859375, 
+                "top": 762.5999755859375
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "NFR", 
+            "tool_state": "{\"gff_file\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"minwidth\": \"\\\"110\\\"\", \"__rerun_remap_job_id__\": null, \"threshold\": \"\\\"140\\\"\", \"__page__\": null}", 
+            "tool_version": "0.1", 
+            "type": "tool", 
+            "uuid": "f7ff59de-ce64-4574-bbd1-e09d10921ca4", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "output_gff_file", 
+                    "uuid": "e294e04c-286a-45c2-8261-6d4db446c860"
+                }
+            ]
+        }, 
+        "12": {
+            "annotation": "", 
+            "content_id": "txstart", 
+            "errors": null, 
+            "id": 12, 
+            "input_connections": {
+                "gff_file": {
+                    "id": 3, 
+                    "output_name": "output_gff_file"
+                }
+            }, 
+            "inputs": [], 
+            "label": "TSS classification 2", 
+            "name": "TSS classification", 
+            "outputs": [
+                {
+                    "name": "output_gff_file", 
+                    "type": "gff"
+                }
+            ], 
+            "position": {
+                "left": 552.4500122070312, 
+                "top": 851.4000244140625
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "txstart", 
+            "tool_state": "{\"__page__\": null, \"assembly\": \"{\\\"__current_case__\\\": 0, \\\"ref_genome_gff_buildin\\\": \\\"/data/nucldyn_publicdata/refGenomes/R64-1-1/genes.gff\\\", \\\"source\\\": \\\"buildin\\\"}\", \"gff_file\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"__rerun_remap_job_id__\": null, \"window\": \"\\\"300\\\"\", \"open_thres\": \"\\\"215\\\"\"}", 
+            "tool_version": "0.1", 
+            "type": "tool", 
+            "uuid": "68e9f307-4028-4e38-843e-b704bd838174", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "output_gff_file", 
+                    "uuid": "28236a0a-734a-4d9c-990a-3699e92fee46"
+                }
+            ]
+        }, 
+        "13": {
+            "annotation": "", 
+            "content_id": "stiffness", 
+            "errors": null, 
+            "id": 13, 
+            "input_connections": {
+                "gff_file": {
+                    "id": 3, 
+                    "output_name": "output_gff_file"
+                }, 
+                "rdata_file": {
+                    "id": 1, 
+                    "output_name": "rdata_file"
+                }
+            }, 
+            "inputs": [], 
+            "label": "Stiffness 2", 
+            "name": "Stiffness", 
+            "outputs": [
+                {
+                    "name": "output_gff_file", 
+                    "type": "gff"
+                }
+            ], 
+            "position": {
+                "left": 558.2666625976562, 
+                "top": 967.2666625976562
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "stiffness", 
+            "tool_state": "{\"gff_file\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"__page__\": null, \"range\": \"\\\"All\\\"\", \"__rerun_remap_job_id__\": null, \"rdata_file\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\"}", 
+            "tool_version": "0.1", 
+            "type": "tool", 
+            "uuid": "a74098ec-2f7e-4dff-82ca-dff330850779", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "output_gff_file", 
+                    "uuid": "5615328c-2b2b-4e5a-952b-e3294c405049"
+                }
+            ]
+        }, 
+        "14": {
+            "annotation": "", 
+            "content_id": "nucDyn", 
+            "errors": null, 
+            "id": 14, 
+            "input_connections": {
+                "gff_file": {
+                    "id": 2, 
+                    "output_name": "output_gff_file"
+                }, 
+                "gff_file2": {
+                    "id": 3, 
+                    "output_name": "output_gff_file"
+                }, 
+                "rdata_file": {
+                    "id": 0, 
+                    "output_name": "rdata_file"
+                }, 
+                "rdata_file2": {
+                    "id": 1, 
+                    "output_name": "rdata_file"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "Nucleosome Dynamics", 
+            "outputs": [
+                {
+                    "name": "output_gff_file", 
+                    "type": "gff"
+                }, 
+                {
+                    "name": "output_bw_file", 
+                    "type": "bigwig"
+                }
+            ], 
+            "position": {
+                "left": 985.5333251953125, 
+                "top": 599.066650390625
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "nucDyn", 
+            "tool_state": "{\"__page__\": null, \"assembly\": \"{\\\"__current_case__\\\": 0, \\\"ref_chrom_sizes_buildin\\\": \\\"/data/nucldyn_publicdata/refGenomes/R64-1-1/R64-1-1.fa.chrom.sizes\\\", \\\"source\\\": \\\"buildin\\\"}\", \"maxdiff\": \"\\\"70\\\"\", \"gff_file\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"pow\": \"\\\"true\\\"\", \"__rerun_remap_job_id__\": null, \"minreads\": \"\\\"3\\\"\", \"rdata_file2\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"equal\": \"\\\"false\\\"\", \"rdata_file\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"indthreshold\": \"\\\"0.05\\\"\", \"maxlen\": \"\\\"140\\\"\", \"range\": \"\\\"All\\\"\", \"magnitude\": \"\\\"true\\\"\", \"minread\": \"\\\"3\\\"\", \"threshold\": \"\\\"0.1\\\"\", \"cores\": \"\\\"1\\\"\", \"gff_file2\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"readsize\": \"\\\"140\\\"\"}", 
+            "tool_version": "0.1", 
+            "type": "tool", 
+            "uuid": "01d1608a-035b-49a2-916b-3713216abe0b", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "plot_RData_file", 
+                    "uuid": "de31dd07-20ed-4a62-945f-b78106b74dcc"
+                }, 
+                {
+                    "label": null, 
+                    "output_name": "output_gff_file", 
+                    "uuid": "2af64813-d6e1-409c-8e72-eecd656e2b88"
+                }, 
+                {
+                    "label": null, 
+                    "output_name": "output_bw_file", 
+                    "uuid": "42831d10-b33a-4767-b016-7cdea11e089f"
+                }
+            ]
+        }, 
+        "15": {
+            "annotation": "", 
+            "content_id": "periodicity_stats", 
+            "errors": null, 
+            "id": 15, 
+            "input_connections": {
+                "gff_file": {
+                    "id": 5, 
+                    "output_name": "output_gff_file"
+                }
+            }, 
+            "inputs": [], 
+            "label": "Nucleosome Gene Phasing Statistics 1", 
+            "name": "Nucleosome Gene Phasing Statistics", 
+            "outputs": [
+                {
+                    "name": "output_genes_csv_file", 
+                    "type": "csv"
+                }, 
+                {
+                    "name": "output_gw_csv_file", 
+                    "type": "csv"
+                }
+            ], 
+            "position": {
+                "left": 773.4000244140625, 
+                "top": 146.4166717529297
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "periodicity_stats", 
+            "tool_state": "{\"gff_file\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"assembly\": \"{\\\"__current_case__\\\": 0, \\\"ref_genome_gff_buildin\\\": \\\"/data/nucldyn_publicdata/refGenomes/R64-1-1/genes.gff\\\", \\\"source\\\": \\\"buildin\\\"}\"}", 
+            "tool_version": "0.1", 
+            "type": "tool", 
+            "uuid": "30ee0ca3-fad4-4b2d-bed9-254fe01bc409", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "output_gw_csv_file", 
+                    "uuid": "e499cf59-3b48-4e32-9f34-3004eaed008c"
+                }, 
+                {
+                    "label": null, 
+                    "output_name": "output_genes_csv_file", 
+                    "uuid": "555605ad-f284-4715-921b-d1fbc695d89f"
+                }
+            ]
+        }, 
+        "16": {
+            "annotation": "", 
+            "content_id": "NFR_stats", 
+            "errors": null, 
+            "id": 16, 
+            "input_connections": {
+                "gff_file": {
+                    "id": 6, 
+                    "output_name": "output_gff_file"
+                }
+            }, 
+            "inputs": [], 
+            "label": "Nucleosome Free Regions Statistics 1", 
+            "name": "Nucleosome Free Regions Statistics", 
+            "outputs": [
+                {
+                    "name": "output_gw_csv_file", 
+                    "type": "csv"
+                }
+            ], 
+            "position": {
+                "left": 774.4500122070312, 
+                "top": 293.91668701171875
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "NFR_stats", 
+            "tool_state": "{\"gff_file\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"assembly\": \"{\\\"__current_case__\\\": 0, \\\"ref_genome_gff_buildin\\\": \\\"/data/nucldyn_publicdata/refGenomes/R64-1-1/genes.gff\\\", \\\"source\\\": \\\"buildin\\\"}\"}", 
+            "tool_version": "0.1", 
+            "type": "tool", 
+            "uuid": "bf61d76f-59a2-4045-8f9e-4cfadd354267", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "output_gw_csv_file", 
+                    "uuid": "b8096257-2285-47a1-a69e-9f7f4051d550"
+                }
+            ]
+        }, 
+        "17": {
+            "annotation": "", 
+            "content_id": "txstart_stats", 
+            "errors": null, 
+            "id": 17, 
+            "input_connections": {
+                "gff_file": {
+                    "id": 7, 
+                    "output_name": "output_gff_file"
+                }
+            }, 
+            "inputs": [], 
+            "label": "TSS Statistics 1", 
+            "name": "TSS Statistics", 
+            "outputs": [
+                {
+                    "name": "output_genes_csv_file", 
+                    "type": "csv"
+                }, 
+                {
+                    "name": "output_gw_png_file", 
+                    "type": "png"
+                }, 
+                {
+                    "name": "output_gw2_png_file", 
+                    "type": "png"
+                }
+            ], 
+            "position": {
+                "left": 774.066650390625, 
+                "top": 389.183349609375
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "txstart_stats", 
+            "tool_state": "{\"gff_file\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"assembly\": \"{\\\"__current_case__\\\": 0, \\\"ref_genome_gff_buildin\\\": \\\"/data/nucldyn_publicdata/refGenomes/R64-1-1/genes.gff\\\", \\\"source\\\": \\\"buildin\\\"}\"}", 
+            "tool_version": "0.1", 
+            "type": "tool", 
+            "uuid": "e7814369-2d1d-45e6-999c-dacfac787358", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "output_gw2_png_file", 
+                    "uuid": "d352d0fb-0ffa-4563-8ed6-d3f67af69912"
+                }, 
+                {
+                    "label": null, 
+                    "output_name": "output_gw_png_file", 
+                    "uuid": "54884f15-e5c9-4643-a1b8-8a01d4d9746f"
+                }, 
+                {
+                    "label": null, 
+                    "output_name": "output_genes_csv_file", 
+                    "uuid": "53b5dc2e-986d-41b6-8d96-d6b8730dc955"
+                }
+            ]
+        }, 
+        "18": {
+            "annotation": "", 
+            "content_id": "stiffness_stats", 
+            "errors": null, 
+            "id": 18, 
+            "input_connections": {
+                "gff_file": {
+                    "id": 8, 
+                    "output_name": "output_gff_file"
+                }
+            }, 
+            "inputs": [], 
+            "label": "Stiffness Statistics 1", 
+            "name": "Stiffness Statistics", 
+            "outputs": [
+                {
+                    "name": "output_genes_csv_file", 
+                    "type": "csv"
+                }, 
+                {
+                    "name": "output_gw_csv_file", 
+                    "type": "csv"
+                }, 
+                {
+                    "name": "output_gw2_png_file", 
+                    "type": "png"
+                }
+            ], 
+            "position": {
+                "left": 773.4000244140625, 
+                "top": 495.5333251953125
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "stiffness_stats", 
+            "tool_state": "{\"gff_file\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"assembly\": \"{\\\"__current_case__\\\": 0, \\\"ref_genome_gff_buildin\\\": \\\"/data/nucldyn_publicdata/refGenomes/R64-1-1/genes.gff\\\", \\\"source\\\": \\\"buildin\\\"}\"}", 
+            "tool_version": "0.1", 
+            "type": "tool", 
+            "uuid": "1597bd45-186f-4fc3-9b15-fa3348a30104", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "output_gw2_png_file", 
+                    "uuid": "7ef08f98-7298-49f7-a02b-37c7d58e343f"
+                }, 
+                {
+                    "label": null, 
+                    "output_name": "output_gw_csv_file", 
+                    "uuid": "344dc572-7a5d-4bd5-9b06-8f3c4d1fbbe7"
+                }, 
+                {
+                    "label": null, 
+                    "output_name": "output_genes_csv_file", 
+                    "uuid": "2a901a1e-a2da-4476-90d2-58ce6c550481"
+                }
+            ]
+        }, 
+        "19": {
+            "annotation": "", 
+            "content_id": "periodicity_stats", 
+            "errors": null, 
+            "id": 19, 
+            "input_connections": {
+                "gff_file": {
+                    "id": 10, 
+                    "output_name": "output_gff_file"
+                }
+            }, 
+            "inputs": [], 
+            "label": "Nucleosome Gene Phasing Statistics 2", 
+            "name": "Nucleosome Gene Phasing Statistics", 
+            "outputs": [
+                {
+                    "name": "output_genes_csv_file", 
+                    "type": "csv"
+                }, 
+                {
+                    "name": "output_gw_csv_file", 
+                    "type": "csv"
+                }
+            ], 
+            "position": {
+                "left": 760.5166625976562, 
+                "top": 645.9000244140625
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "periodicity_stats", 
+            "tool_state": "{\"gff_file\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"assembly\": \"{\\\"__current_case__\\\": 0, \\\"ref_genome_gff_buildin\\\": \\\"/data/nucldyn_publicdata/refGenomes/R64-1-1/genes.gff\\\", \\\"source\\\": \\\"buildin\\\"}\"}", 
+            "tool_version": "0.1", 
+            "type": "tool", 
+            "uuid": "eb9a769f-2965-4764-807d-75fe902c84bc", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "output_gw_csv_file", 
+                    "uuid": "c875743c-b03b-4fc8-ac62-06a2ec0c1b8c"
+                }, 
+                {
+                    "label": null, 
+                    "output_name": "output_genes_csv_file", 
+                    "uuid": "89a8b76f-982c-46a2-af60-70c2169ff309"
+                }
+            ]
+        }, 
+        "20": {
+            "annotation": "", 
+            "content_id": "NFR_stats", 
+            "errors": null, 
+            "id": 20, 
+            "input_connections": {
+                "gff_file": {
+                    "id": 11, 
+                    "output_name": "output_gff_file"
+                }
+            }, 
+            "inputs": [], 
+            "label": "Nucleosome Free Regions Statistics 2", 
+            "name": "Nucleosome Free Regions Statistics", 
+            "outputs": [
+                {
+                    "name": "output_gw_csv_file", 
+                    "type": "csv"
+                }
+            ], 
+            "position": {
+                "left": 767.4166870117188, 
+                "top": 767.38330078125
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "NFR_stats", 
+            "tool_state": "{\"gff_file\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"assembly\": \"{\\\"__current_case__\\\": 0, \\\"ref_genome_gff_buildin\\\": \\\"/data/nucldyn_publicdata/refGenomes/R64-1-1/genes.gff\\\", \\\"source\\\": \\\"buildin\\\"}\"}", 
+            "tool_version": "0.1", 
+            "type": "tool", 
+            "uuid": "7bbe31f8-1db1-4d64-845c-0e180e945a15", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "output_gw_csv_file", 
+                    "uuid": "1d090b0a-f65e-47c7-a45e-728a4b02d8d9"
+                }
+            ]
+        }, 
+        "21": {
+            "annotation": "", 
+            "content_id": "txstart_stats", 
+            "errors": null, 
+            "id": 21, 
+            "input_connections": {
+                "gff_file": {
+                    "id": 12, 
+                    "output_name": "output_gff_file"
+                }
+            }, 
+            "inputs": [], 
+            "label": "TSS Statistics 2", 
+            "name": "TSS Statistics", 
+            "outputs": [
+                {
+                    "name": "output_genes_csv_file", 
+                    "type": "csv"
+                }, 
+                {
+                    "name": "output_gw_png_file", 
+                    "type": "png"
+                }, 
+                {
+                    "name": "output_gw2_png_file", 
+                    "type": "png"
+                }
+            ], 
+            "position": {
+                "left": 768.9500122070312, 
+                "top": 856.933349609375
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "txstart_stats", 
+            "tool_state": "{\"gff_file\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"assembly\": \"{\\\"__current_case__\\\": 0, \\\"ref_genome_gff_buildin\\\": \\\"/data/nucldyn_publicdata/refGenomes/R64-1-1/genes.gff\\\", \\\"source\\\": \\\"buildin\\\"}\"}", 
+            "tool_version": "0.1", 
+            "type": "tool", 
+            "uuid": "ef8e0139-d9e5-418e-8c4f-06ae7f16a454", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "output_gw2_png_file", 
+                    "uuid": "d97281b2-47f9-4bb8-b709-95443cf41ade"
+                }, 
+                {
+                    "label": null, 
+                    "output_name": "output_gw_png_file", 
+                    "uuid": "d2b5e6cc-ee5f-4dbe-a247-eff45c51551f"
+                }, 
+                {
+                    "label": null, 
+                    "output_name": "output_genes_csv_file", 
+                    "uuid": "4b4b3028-92f9-475d-954a-3a249990d2ee"
+                }
+            ]
+        }, 
+        "22": {
+            "annotation": "", 
+            "content_id": "stiffness_stats", 
+            "errors": null, 
+            "id": 22, 
+            "input_connections": {
+                "gff_file": {
+                    "id": 13, 
+                    "output_name": "output_gff_file"
+                }
+            }, 
+            "inputs": [], 
+            "label": "Stiffness Statistics 2", 
+            "name": "Stiffness Statistics", 
+            "outputs": [
+                {
+                    "name": "output_genes_csv_file", 
+                    "type": "csv"
+                }, 
+                {
+                    "name": "output_gw_csv_file", 
+                    "type": "csv"
+                }, 
+                {
+                    "name": "output_gw2_png_file", 
+                    "type": "png"
+                }
+            ], 
+            "position": {
+                "left": 777.566650390625, 
+                "top": 970.1666870117188
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "stiffness_stats", 
+            "tool_state": "{\"gff_file\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"assembly\": \"{\\\"__current_case__\\\": 0, \\\"ref_genome_gff_buildin\\\": \\\"/data/nucldyn_publicdata/refGenomes/R64-1-1/genes.gff\\\", \\\"source\\\": \\\"buildin\\\"}\"}", 
+            "tool_version": "0.1", 
+            "type": "tool", 
+            "uuid": "0345e695-6951-4c30-9ffb-6817641c0439", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "output_gw2_png_file", 
+                    "uuid": "028ec2ad-e211-4aee-88de-c1b283b58a20"
+                }, 
+                {
+                    "label": null, 
+                    "output_name": "output_gw_csv_file", 
+                    "uuid": "8602bb9f-9e54-4594-8a76-1227b1f4040e"
+                }, 
+                {
+                    "label": null, 
+                    "output_name": "output_genes_csv_file", 
+                    "uuid": "acf8ba19-65db-49e8-a6b1-3f12d4753734"
+                }
+            ]
+        }, 
+        "23": {
+            "annotation": "", 
+            "content_id": "nucDyn_stats", 
+            "errors": null, 
+            "id": 23, 
+            "input_connections": {
+                "gff_file": {
+                    "id": 14, 
+                    "output_name": "output_gff_file"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "Nucleosome Dynamics Statistics", 
+            "outputs": [
+                {
+                    "name": "output_genes_csv_file", 
+                    "type": "csv"
+                }, 
+                {
+                    "name": "output_gw_png_file", 
+                    "type": "png"
+                }
+            ], 
+            "position": {
+                "left": 1188.13330078125, 
+                "top": 632.38330078125
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "nucDyn_stats", 
+            "tool_state": "{\"gff_file\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"assembly\": \"{\\\"__current_case__\\\": 0, \\\"ref_genome_gff_buildin\\\": \\\"/data/nucldyn_publicdata/refGenomes/R64-1-1/genes.gff\\\", \\\"source\\\": \\\"buildin\\\"}\"}", 
+            "tool_version": "0.1", 
+            "type": "tool", 
+            "uuid": "d65b797c-e576-4fd7-95a7-3bdcc3a9a227", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "output_gw_png_file", 
+                    "uuid": "847d3a4d-bd12-4250-9fe3-32c1b197e0bb"
+                }, 
+                {
+                    "label": null, 
+                    "output_name": "output_genes_csv_file", 
+                    "uuid": "8504e3bc-95e3-45f0-85c5-c09332c83ba4"
+                }
+            ]
+        }
+    }, 
+    "tags": [], 
+    "uuid": "074b37e5-c855-43ac-802b-e338450f05c0", 
+    "version": 7
+}

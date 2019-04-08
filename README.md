@@ -51,7 +51,7 @@ docker pull mmbirb/nucleosome-dynamics:latest
 Clone the current repository to your installation path:
 ``` sh
 git clone https://github.com/nucleosome-dynamics/nucleosome_dynamics_galaxy.git
-cd /nucleosome_dynamics_galaxy
+cd nucleosome_dynamics_galaxy
 INSTALL_PATH=`pwd`
 ```
 
