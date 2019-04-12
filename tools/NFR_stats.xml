@@ -5,7 +5,7 @@
     </requirements>
     <command>
 	<![CDATA[    
-	docker run -v $__root_dir__/database/files:$__root_dir__/database/files -v /data:/data -v /tmp:/tmp  -u `id -u`:`id -g`  mmbirb/nucldyn NFR_stats --input $gff_file 
+	docker run -v $__root_dir__/database/files:$__root_dir__/database/files -v /data:/data -v /tmp:/tmp  -u `id -u`:`id -g`  mmbirb/nucleosome-dynamics NFR_stats --input $gff_file 
 	#if $assembly.source == "buildin":
         	--genome ${assembly.ref_genome_gff_buildin}
       	#else if $assembly.source == "history":
@@ -15,14 +15,14 @@
 	]]>
   </command>
   <inputs>
-    <param name="gff_file" type="data" format="gff" label="Input Nucleosome Calls"/>
+    <param name="gff_file" type="data" format="gff" label="Nucleosome Free Regions (GFF)" help="Nucleosome Free Regions as annotated by NFR tool" />
      <conditional name="assembly">
-            <param name="source" type="select" label="Select a built-in reference genome or use one from your history" help="Taking from each assembly their chromosome sizes and their annotated genes.">
+            <param name="source" type="select" label="Select a built-in reference genome or use one from your history" help="Taking from each assembly their annotated genes.">
                 <option value="buildin" selected="True">Use a built-in genome</option>
                 <option value="history">Use a genome from the history</option>
             </param>
             <when value="buildin">
-                <param name="ref_genome_gff_buildin" type="select" label="Select reference genome" help="If your genome of interest is not listed, contact the Galaxy team">
+                <param name="ref_genome_gff_buildin" type="select" label="Select reference genome (Genes)" help="Select gene annotations for your reference genome. If your genome of interest is not listed, contact the Galaxy team.">
                     <options from_file="nucldyn_publicdata.loc">
                         <column name="name" index="2"/>
                         <column name="value" index="4"/>
@@ -30,7 +30,7 @@
                 </param>
             </when>
             <when value="history">
-                <param name="ref_genome_gff_history" type="data" format="gff" label="Select gene annotations for your reference genome" help="Check below the documentation for lerning about the file format."/>
+                <param name="ref_genome_gff_history" type="data" format="gff" label="Reference genome (Genes)" help="Upload gene annotations for your reference genome. Check below the documentation for learning about the file format."/>
             </when>
        </conditional>
 </inputs>
@@ -45,18 +45,18 @@
 	  </test>
   </tests>	
 		<help>
-.. class:: warningmark
-
-
-Check the documentation for setting the tool parameters at the source code repository: https://github.com/nucleosome-dynamics/nucleosome_dynamics 
+.. image:: ${static_path}/images/NucleosomeDynamicsLogo.png
+    :height: 80
+    :width: 200
 
 -----
 
-.. image:: ${static_path}/images/NucleosomeDynamicsLogo.png 
-    :height: 80 
-    :width: 200
+Nucleosome Dynamics is a set of tools that take MNase-seq and ATAC-seq aligned reads and performs a serie of nucleosome-related analyses on them.
 
-**http://mmb.irbbarcelona.org/NucleosomeDynamics**
+.. class:: infomark
+
+Visit the  documentation of the original application for learning more about the accepted values and formats. http://mmb.irbbarcelona.org/NucleosomeDynamics/help/usage/nucleosome-dynamics
+			
    </help>
    <citations>
         <citation type="bibtex">

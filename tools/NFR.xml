@@ -5,11 +5,11 @@
     </requirements>
     <command>
 <![CDATA[
-	docker run -v $__root_dir__/database/files:$__root_dir__/database/files -v /tmp:/tmp -u `id -u`:`id -g`  mmbirb/nucldyn NFR --input $gff_file --output $output_gff_file --minwidth $minwidth --threshold $threshold  
+	docker run -v $__root_dir__/database/files:$__root_dir__/database/files -v /tmp:/tmp -u `id -u`:`id -g`  mmbirb/nucleosome-dynamics NFR --input $gff_file --output $output_gff_file --minwidth $minwidth --threshold $threshold  
 ]]>
   </command>
   <inputs>
-    <param name="gff_file" type="data" format="gff" label="Nucleosome Calls"/>
+    <param name="gff_file" type="data" format="gff" label="Nucleosome Calls (GFF)" help="Nucleosome calls in GFF format as obtained from nucleR."/>
     <param name="minwidth" size="4" type="integer" value="110" label="Minimum Width" help="Minimum width for a linker fragment to be considered a nucleosome-free region." />  
     <param name="threshold" size="4" type="integer" value="140" label="Maximum Width" help="Maximum width for a linker fragment to be considered a nucleosome-free region." />  
 </inputs>
@@ -25,19 +25,17 @@
 	  </test>
   </tests>
      <help>
-.. class:: warningmark
-
-
-Check the documentation for setting the tool parameters at the source code repository: https://github.com/nucleosome-dynamics/nucleosome_dynamics 
-
------
-
-.. image:: ${static_path}/images/NucleosomeDynamicsLogo.png
+ .. image:: ${static_path}/images/NucleosomeDynamicsLogo.png
     :height: 80
     :width: 200
 
-**http://mmb.irbbarcelona.org/NucleosomeDynamics**
+-----
 
+Nucleosome Dynamics is a set of tools that take MNase-seq and ATAC-seq aligned reads and performs a serie of nucleosome-related analyses on them.
+
+.. class:: infomark
+
+Visit the  documentation of the original application for learning more about the accepted values and formats. http://mmb.irbbarcelona.org/NucleosomeDynamics/help/usage/nucleosome-dynamics
    </help>
    <citations>
         <citation type="bibtex">

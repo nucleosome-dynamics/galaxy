@@ -4,10 +4,12 @@
   <requirement type="binary">docker</requirement>
   </requirements>
   <command>
-	  docker run -v $__root_dir__/database/files:$__root_dir__/database/files -v /tmp:/tmp -u `id -u`:`id -g` mmbirb/nucldyn readBAM --input $bam_file --output $rdata_file --type $seq_type
+<![CDATA[
+docker run -v $__root_dir__/database/files:$__root_dir__/database/files -v /tmp:/tmp -u `id -u`:`id -g` mmbirb/nucleosome-dynamics readBAM --input $bam_file --output $rdata_file --type $seq_type
+]]>
   </command>
   <inputs>
-    <param name="bam_file" type="data" format="bam" label="BAM File to convert"/>
+    <param name="bam_file" type="data" format="bam" label="MNase-seq / ATAC-seq BAM file" help="Upload your MNase-seq or ATAC-seq reads file in BAM format. Access sample data at 'Shared Data -> Data libraries" />
     <param name="seq_type" type="select" label="Type of sequence reads">
       <option value="paired">Paired</option>
       <option value="single">Single</option>
@@ -23,19 +25,19 @@
 	  <output name="rdata_file" file="readBAM__cellcycleM_chrII.RData"/>
        </test>
    </tests>
-    <help>
-.. class:: warningmark
-
-
-Check the documentation for setting the tool parameters at the source code repository: https://github.com/nucleosome-dynamics/nucleosome_dynamics 
+   <help>
+ .. image:: ${static_path}/images/NucleosomeDynamicsLogo.png
+    :height: 80
+    :width: 200
 
 -----
 
-.. image:: ${static_path}/images/NucleosomeDynamicsLogo.png 
-    :height: 80 
-    :width: 200
+Nucleosome Dynamics is a set of tools that take MNase-seq and ATAC-seq aligned reads and performs a serie of nucleosome-related analyses on them.
 
-**http://mmb.irbbarcelona.org/NucleosomeDynamics**
+.. class:: infomark
+
+Visit the  documentation of the original application for learning more about the accepted values and formats. http://mmb.irbbarcelona.org/NucleosomeDynamics/help/usage/nucleosome-dynamics
+
    </help>
    <citations>
         <citation type="bibtex">
@@ -45,7 +47,7 @@ Check the documentation for setting the tool parameters at the source code repos
   title = {Nucleosome Dynamics suite: containerized installation},
   publisher = {GitHub},
   journal = {GitHub repository},
-  url = {http://mmb.irbbarcelona.org/gitlab/NuclDynamics/docker},
+  url = {https://github.com/nucleosome-dynamics/nucleosome_dynamics},
 }</citation>
  </citations>
 </tool>

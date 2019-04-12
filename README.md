@@ -144,7 +144,7 @@ $GALAXY_ROOT/run.sh --daemon;
 
 You can import Nucleosome Dynamics workflow from the Galaxy web interface.  Got to `[YOUR_GALAXY_URL]/workflows/import` and import it:
 
-* 1- from URL:  set "Archived Workflow URL" as "https://github.com/nucleosome-dynamics/nucleosome_dynamics_galaxy/blob/master/workflow/Galaxy-Workflow-Nucleosome_Dynamics_Workflow.ga"
+* 1- from URL:  set "Archived Workflow URL" as "https://raw.githubusercontent.com/nucleosome-dynamics/nucleosome_dynamics_galaxy/master/workflow/Galaxy-Workflow-Nucleosome_Dynamics_Workflow.ga"
 * 2- from file: download `workflow/Galaxy-Workflow-Nucleosome_Dynamics_Workflow.ga` and upload it to "Archived Workflow File".
 
 Make sure that all the tools are installed before Importing. You can run the full workflow with this import or create one using create workflow option.
